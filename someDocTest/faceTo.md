@@ -7,13 +7,39 @@
 出于对工程师文化的向往，我在研发团队管理期间，尝试了多种方法去建立良性的团队氛围，并有效的改善了研发效率；
 技术是为产品支撑的，所以我现在也在熟悉产品设计过程，希望可以结合公司发展战略，营销策略，跟着团队打造出一个好的产品。
 
-1、学习前端的途径和方法/收获的东西/遇到的困难
+### 1、学习前端的途径和方法/收获的东西/遇到的困难
+### 2、性能优化有丰富的经验：
+### 3、熟练使用webPack、Git、代理:
+### 4、react、node、es6:==>虚拟dom 、react和vue比较、es6:
+### 5、sass less
 
-2、性能优化有丰富的经验：
+### 6、前端的异步操作有哪些：
+①回调函数
+②async/await(相当于promise)
+③setTimeout(宏任务)
+④Promise.then(微任务)
+⑤ajax--》then/catch
 
-3、熟练使用webPack、Git、代理:
+### 7、对宏任务微任务流程的理解？任务队列里面哪个优先：
+同步代码--》微任务--》宏任务
+①在当前的[微任务]没有执行完成时，是不会执行下一个[宏任务]的。
+②也就是说new Promise在实例化的过程中所执行的代码都是同步进行的，而then中注册的回调才是异步执行的。
+在同步代码执行完成后才回去检查是否有异步任务完成，并执行对应的回调，而微任务又会在宏任务之前执行。
+③宏任务：
+    setTimeout
+    setInterval
+    setImmediate (Node独有)
+    requestAnimationFrame (浏览器独有)
+    I/O
+    UI rendering (浏览器独有)
+④微任务：
+    process.nextTick (Node独有)
+    Promise
+    Object.observe
+    MutationObserver
+ （注：这里只针对浏览器和NodeJS）
+ps:事件轮询：https://shimo.im/docs/Bme7GuUc4tY7f8C1/read
+### 8、深浅拷贝：
+### 9、手写防抖&节流，二者有何区别：
 
-4、react、node、es6:==>虚拟dom 、react和vue比较、es6:
-
-5、sass less
 
