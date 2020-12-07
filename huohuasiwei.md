@@ -52,7 +52,7 @@ Redux 的设计是以几个原则为优先的：要让状态的变化可追踪�
 15. 对于解决跨域问题有哪些办法
 16. webpack的构建用过哪些
 17. 实现jsonp
-
+```
 function jsonp(url, jsonpCallback, success) {
   let script = document.createElement('script')
   script.src = url
@@ -66,4 +66,6 @@ function jsonp(url, jsonpCallback, success) {
 jsonp('http://xxx', 'callback', function(value) {
   console.log(value)
 })
+
+```
 

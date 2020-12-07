@@ -25,11 +25,11 @@
     this分别都是在什么机制中生成的 --》普通函数是在调用的时候，箭头函数是在声明的时候
 6. 对于react需要有哪些优化的点--》考虑什么时候进行组件的更新
 7. 你们公司应用的webpack是几版本的？
-   对于webpack的配置优化
-   webpack的构建流程
-   webpack有哪些loader
-   webpack的plugin和loader区别
-   webpack打包出来的静态资源都带有不同的hash值，有的是chunk.hash.js 有的是hash 他们的区别是什么？
+  -  对于webpack的配置优化
+  -  webpack的构建流程
+  -  webpack有哪些loader
+  -  webpack的plugin和loader区别
+  -  webpack打包出来的静态资源都带有不同的hash值，有的是chunk.hash.js 有的是hash 他们的区别是什么？
 8. 有了解过其他的构建工具吗？--》gulp
 9. 对于http状态码304的理解--》涉及到的考点是浏览器的协商缓存机制
 10. 认为react与hook相比较的优缺点
