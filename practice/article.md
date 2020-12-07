@@ -1,0 +1,8 @@
+1. [十大经典排序js](https://juejin.cn/post/6844903444365443080)
+2. [es6-10 新特性一览](https://juejin.cn/post/6844903811622912014)
+3. [new一个类的时候，都发生了什么| 斐波那契数列|实现一个栈..手写和算法](https://juejin.cn/post/6844903575559077895)
+4. [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A)
+5. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
+6. [var let const 区别--》es6全解](https://juejin.cn/post/6844903775329583112)
+7. [手写bind、手写深拷贝、手写 EventHub（发布-订阅）、手写 Promise](https://zhuanlan.zhihu.com/p/160315811)
+8. [手写Promise/Promise.all/Promise.race](https://zhuanlan.zhihu.com/p/196671665)

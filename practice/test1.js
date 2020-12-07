@@ -1,0 +1,169 @@
+/**   一颗星   */
+// 手写一个flat a array like [1, [2, 3]] => [1, 2, 3]
+function flat(arr) {
+    let result = [];
+    for(let ele of arr) {
+        if(Array.isArray(ele)) {
+            result = result.concat(flat(ele));
+        }else {
+            result = result.concat(ele); // 会返回一个新数组
+        }
+    }
+    return result;
+}
+
+// 简单写法
+function flatten(arr) {
+    return [].concat(
+      ...arr.map(ele => Array.isArray(ele) ? flatten(ele) : ele
+    ))
+  }
+
+// 防抖debounce
+// 应用场景 ： 多次执行会变成最后一次
+function debounce(fn, wait) {
+    let timer;
+    return (...args)=>{
+        clearTimeout(timer);
+        timer = setTimeout(()=>{
+            fn(...args)
+        }, wait)
+    }
+}
+
+// 节流 throttle
+// 应用场景 ：多次执行只会执行第一次 有一个加锁 lock
+function throttle(fn, wait) {
+    let timer;
+    return (...args)=>{
+        if(timer) {
+            return
+        }
+        timer = setTimeout(()=>{
+            fn(...args)
+            timer = null
+        }, wait)
+    }
+}
+
+// 斐波那契数列 f(n) = fb(n-1) + fb(n-2)  递归调用 时间复杂度为O(2^n)
+function fb(n){
+    if(n == 1 || n == 2) {
+        return 1;
+    }
+    return fb(n-1) + fb(n-2);
+}
+
+// 时间复杂度为O(n)
+function fib(n){
+    let a = 0;
+    let b = 1;
+    let c = a + b;
+        for(let i = 3; i<n; i++){
+            a = b;// 1
+            b = c;// 1
+            c = a + b; // 2 第三位
+        }
+        return c;
+}
+
+// 实现n的阶乘 n! = n * (n-1)! 递归调用
+function mul(n){
+    if(n == 1 || n == 0) {
+        return 1;
+    }
+    return n * mul(n-1)
+}
+
+// 手写一个bind (初级版本)
+Function.prototype._bind = function(_asThis, ...args) {
+    const fn = this; // 这里的 this 就是调用 bind 的函数 func
+    return (...args1)=>{
+        return fn.apply(_asThis, [...args, ...args1])
+    }
+  }
+
+  /**(中级版本)
+ *  function add (){
+      return this.x + this.y;
+    }
+    var obj = {
+      x: 1,
+      y: 2
+    }
+    console.log(add.bind_2(obj), 12121)
+ */
+  Function.prototype.bind_2 = function(asThis) {
+    var slice = Array.prototype.slice;
+    var args = slice.call(arguments, 1);
+    var fn = this;
+    if (typeof fn !== "function") {
+      throw new Error("cannot bind non_function");
+    }
+    return function () {
+      var args2 = slice.call(arguments, 0);
+      return fn.apply(asThis, args.concat(args2));
+    };
+  }
+
+// 手写一个slice
+Array.prototype.slice = function(start,end){
+    var result = new Array();
+    start = start || 0;
+    end = end || this.length; //this指向调用的对象，当用了call后，能够改变this的指向，也就是指向传进来的对象，这是关键
+    for(var i = start; i < end; i++){
+         result.push(this[i]);
+    }
+    return result;
+}
+// 手写深拷贝
+// const copy = JSON.parse(JSON.stringify(data)); // JSON不支持的类型都用不了
+
+/**let arr1 = new DeepClone().clone(arr)
+ *  循环遍历 + 递归
+    对象分类型讨论
+    解决循环引用（环）
+ */
+class DeepClone {
+    constructor() {
+      this.cacheList = [];
+    }
+    clone(source) {
+      if (source instanceof Object) {
+        const cache = this.findCache(source);
+        if (cache) return cache; // 如果找到缓存，直接返回
+        else {
+          let target;
+          if (source instanceof Array) {
+            target = new Array();
+          } else if (source instanceof Function) {
+            target = function () {
+              return source.apply(this, arguments);
+            };
+          } else if (source instanceof Date) {
+            target = new Date(source);
+          } else if (source instanceof RegExp) {
+            target = new RegExp(source.source, source.flags);
+          }
+          this.cacheList.push([source, target]); // 把源对象和新对象放进缓存列表
+          for (let key in source) {
+            if (source.hasOwnProperty(key)) { // 不拷贝原型上的属性，太浪费内存
+              target[key] = this.clone(source[key]); // 递归克隆
+            }
+          }
+          return target;
+        }
+      }
+      return source;
+    }
+    findCache(source) {
+      for (let i = 0; i < this.cacheList.length; ++i) {
+        if (this.cacheList[i][0] === source) {
+          return this.cacheList[i][1]; // 如果有环，返回对应的新对象
+        }
+      }
+      return undefined;
+    }
+  }
+
+

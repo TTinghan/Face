@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+        /** 充满第一屏是关键*/
+        /* height: 100vh; */
+      }
+
+     .classB {
+       /* 水平垂直居中 */
+       /* position: absolute;
+       width: 200px;
+       height: 200px;
+       top: 50%;
+       left: 50%;
+       margin-left: -100px;
+       margin-top: -100px;
+       background: pink; */
+
+       /* position: absolute;
+       top: 0;
+       bottom: 0;
+       left: 0;
+       right: 0;
+       width: 200px;
+       height: 200px;
+       margin: auto;
+       border: 2px solid #f40; */
+
+       /* width: 200px;
+       border: 2px solid #f40; */
+     }
+     p {
+        background: red;
+        color: #000;
+        /*
+        position: absolute;
+        */
+      }
+    </style>
+  </head>
+  <body>
+      <div>
+          <span>11111</span>
+          <p>2222<p>
+          <span>3333</span>
+         </div>
+  </body>  
+  <script>
+  // function rancolr() {
+  //     var r = parseInt(Math.random() * 256);
+  //     var g = parseInt(Math.random() * 256);
+  //     var b = parseInt(Math.random() * 256);
+  //     var rgb = "rgb(" + r + "," + g + "," + b + ")";
+  //     return rgb;
+  //  }
+  //  rancolr();
+
+  //  setTimeout(() => {
+  //     setTimeout(() => {
+  //       console.log(1);
+  //     }, 0);
+  // }, 0);
+
+  // setTimeout(() => {
+  //   console.log(2);
+  // }, 100);
+
+    // 将hex表示方式转换为rgb表示方式(这里返回rgb数组组合)
+    // function colorRgb(sColor){
+    //    var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    //    var sColor = sColor.toLowerCase();// 小写
+    //    if(sColor && reg.test(sColor)){
+    //           //  统一6位颜色值
+    //            if(sColor.length === 4){
+    //                    var sColorNew = "#";
+    //                    for(var i=1; i<4; i+=1){
+    //                            sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));
+    //                    }
+    //                    sColor = sColorNew;
+    //            }
+    //            //处理六位的颜色值
+    //            var sColorChange = [];
+    //            for(var i=1; i<7; i+=2){
+    //                    sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
+    //            }
+    //            return sColorChange;
+    //    }else{
+    //            return sColor;
+    //    }
+    // };
+
+    // 将rgb表示方式转换为hex表示方式
+    // function colorHex(rgb){
+    //    var _this = rgb;
+    //    var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    //    if(/^(rgb|RGB)/.test(_this)){
+    //            var aColor = _this.replace(/(?:\(|\)|rgb|RGB)*/g,"").split(",");
+    //            var strHex = "#";
+    //            for(var i=0; i<aColor.length; i++){
+    //                    var hex = Number(aColor[i]).toString(16);
+    //                    hex = hex<10 ? 0+''+hex :hex;// 保证每个rgb的值为2位
+    //                    if(hex === "0"){
+    //                            hex += hex;
+    //                    }
+    //                    strHex += hex;
+    //            }
+    //            if(strHex.length !== 7){
+    //                    strHex = _this;
+    //            }
+    //            return strHex;
+    //    }else if(reg.test(_this)){
+    //            var aNum = _this.replace(/#/,"").split("");
+    //            if(aNum.length === 6){
+    //                    return _this;
+    //            }else if(aNum.length === 3){
+    //                    var numHex = "#";
+    //                    for(var i=0; i<aNum.length; i+=1){
+    //                            numHex += (aNum[i]+aNum[i]);
+    //                    }
+    //                    return numHex;
+    //            }
+    //    }else{
+    //            return _this;
+    //    }
+    // }
+    // console.log(colorRgb('#fff'));
+    // console.log(colorHex('rgb(150,01,89)'));
+    </script>
+    <script src="./practice/test1.js"></script>
+</html>
