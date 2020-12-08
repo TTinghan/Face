@@ -6,15 +6,14 @@
  new运算符的执行过程
     新生成一个对象
     链接到原型: obj.__proto__ = Con.prototype
-    绑定this: apply
+    绑定this: 将这个对象作为构造函数的 this
     返回新对象(如果构造函数有自己 retrun 时，则返回该值)
 
-    function create() {
-    let obj = new Object();
-    let Con = [].shift.call(arguments); // 找到new的构造函数
-    obj.__proto__ = Con.prototype;
-    let result = Con.apply(obj, arguments);// 把当前的函数的this改变指向到新的obj
-    return typeof result === 'object' ? result : obj; // 返回一个新的return值或新的对象
+    function myNew(Con, ...args) {
+        let obj = Object.create(Con.prototype)
+        let result = Con.apply(obj, args)
+        return typeof obj === 'object' ? result : obj
+    }
 }
 
 ```

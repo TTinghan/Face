@@ -8,7 +8,7 @@
 function arrUnique(nums = []) {
     // {item} 生成值的对象集合
     let list= [...new Set(nums)];
-    // 改变原数组
+    // 改变原数组 会返回删除项 start,deleteElement, items
     nums.splice(0, nums.length, ...list);
     return nums;
 }

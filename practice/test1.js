@@ -46,6 +46,8 @@ function throttle(fn, wait) {
     }
 }
 
+
+
 // 斐波那契数列 f(n) = fb(n-1) + fb(n-2)  递归调用 时间复杂度为O(2^n)
 function fb(n){
     if(n == 1 || n == 2) {
@@ -55,17 +57,16 @@ function fb(n){
 }
 
 // 时间复杂度为O(n)
-function fib(n){
-    let a = 0;
-    let b = 1;
-    let c = a + b;
-        for(let i = 3; i<n; i++){
-            a = b;// 1
-            b = c;// 1
-            c = a + b; // 2 第三位
-        }
-        return c;
-}
+var fib = function(n) {
+    if(n === 0) return 0
+    if(n === 1) return 1
+    let [a, b] = [0, 1]
+    for(let i = 1;i<n;i++){
+        let t = a;
+        [a, b] = [b, t + b];
+    }
+    return b
+};
 
 // 动态规划法 1,1,2,3,5,8,13.....
 function fibo(n) {
