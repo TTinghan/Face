@@ -1,10 +1,13 @@
 /**
- * 深拷贝 完整版
+ * 深拷贝 完整版！！！！
  * 关键点：=>
  * 判断类型
  * 返回创建实例对象的 Object 构造函数的引用constructor
  * 枚举+递归
  */
+
+const copy = JSON.parse(JSON.stringify(data)); // JSON不支持的类型都用不了
+
  function cloneDeep(target) {
      if(target == null || target !== 'object') return target;
      const newObj = new target.constructor(); //返回创建实例对象的 Object 构造函数的引用， 无需判断Function或ExpReg
@@ -26,6 +29,7 @@ function clone(obj){
     }
     return cloneTarget;
 }
+
 // 手动实现一个深克隆 --》如果有更深层次的对象可以继续递归直到属性为原始类型
 // JSON.parse(JSON.stringify()); 
 // 如果是原始类型，无需继续拷贝，直接返回

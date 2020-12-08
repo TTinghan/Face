@@ -1,4 +1,5 @@
 /**   两颗星   */
+
 // 手写lodash/curry 柯里化
 function curry (func) {
     return function curriedFn (...args) {
@@ -67,3 +68,33 @@ class EventHub {
       this.cache[eventName].splice(index, 1);
     }
   }
+
+  // 手写await/async
+  // 原理Generator
+function myAsync () {
+    spawn(function *() {
+        xxx
+    })
+}
+function spawn (fn) {
+    const gen = fn();
+    return new Promise((resolve, reject) => {
+        function step (fn) {
+            let next
+            try {
+                next = fn();
+            } catch(e) {
+                reject(e)
+            }
+            if (next.done) {
+                resolve(next.value);
+            }
+            next.value.then(() => {
+                step(gen.next)
+            }).catch(err => {
+                reject(err)
+            })
+        }
+        step(gen.next)
+    })
+}

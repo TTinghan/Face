@@ -184,7 +184,7 @@ Promise2.all = function(arrReqs) {
         })
       }
     })
-  }
+}
 
 //   手写一个promise.race
 /**
