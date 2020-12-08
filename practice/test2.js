@@ -13,6 +13,18 @@ function curry (func) {
     }
 }
 
+/**
+ * 简易代码 
+ * 入参是fun
+ * return fun
+ */
+function curry(func) {
+    const g = (...allArgs)=>{
+        allArgs.length >= func.length ? func(...allArgs) : (...restArgs)=>{ g(...allArgs, ...restArgs) }
+    }
+    return g;
+}
+
 // 手写lodash/flowRight(f,g) 是从右到左运行=> 函数组合f(g(x))
 // 考点 reduce(fn) =>
 // reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。
@@ -32,3 +44,26 @@ const first = arr => arr[0];
 
 const composeFn = flowRight(toUpper, first, reverse);// 传入需要组合的fns 
 composeFn(arr);// 执行这个composeFn
+
+/**手写 EventHub（发布-订阅）
+ * 核心思路是：
+    使用一个对象作为缓存
+    on 负责把方法发布到缓存的 EventName 对应的数组
+    emit 负责遍历触发（订阅） EventName 下的方法数组
+    off 找方法的索引，并删除
+ */
+class EventHub {
+    cache = {}; // 作为缓存
+    on(eventName, fn) {
+      this.cache[eventName] = this.cache[eventName] || [];
+      this.cache[eventName].push(fn);
+    }
+    emit(eventName) {
+      this.cache[eventName].forEach((fn) => fn());
+    }
+    off(eventName, fn) {
+      const index = indexOf(this.cache[eventName], fn); // 这里用 this.cache[eventName].indexOf(fn) 完全可以，封装成函数是为了向下兼容
+      if (index === -1) return;
+      this.cache[eventName].splice(index, 1);
+    }
+  }

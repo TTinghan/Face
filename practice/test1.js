@@ -75,13 +75,67 @@ function mul(n){
     return n * mul(n-1)
 }
 
-// 手写一个bind (初级版本)
-Function.prototype._bind = function(_asThis, ...args) {
-    const fn = this; // 这里的 this 就是调用 bind 的函数 func
-    return (...args1)=>{
-        return fn.apply(_asThis, [...args, ...args1])
-    }
+
+// 三大this指向改变方法用法
+function sayHelloTo (to) {
+  console.log(`${this.name} say hello to ${to}`)
+}
+var Jerry = {
+name: 'Jerry'
+}
+var John = {
+  name: 'John'
+}
+var Foo = {
+  name: 'Foo'
+}
+
+sayHelloTo.call(Jerry, 'Tom'); // Jerry say hello to Tom
+sayHelloTo.apply(John, ['Bar']); // John say hello to Bar
+var say = sayHelloTo.bind(Foo); // Foo say hello to ABC
+say('ABC');
+
+// 手写一个 fn.call(obj, 'a', 'b', ...)
+Function.prototype.myCall = function(_asThis, ...args) {
+  // 判断是否是undefined和null
+  if (typeof _asThis === 'undefined' || _asThis === null) {
+    _asThis = window
   }
+  let fnSymbol = Symbol()
+  _asThis[fnSymbol] = this; // 这里的 this 就是调用 call 的函数 func
+  let fn = _asThis[fnSymbol] (...args); // 返回一个函数的执行
+  delete _asThis[fnSymbol] 
+  return fn
+}
+
+// 手写一个 fn.apply(obj, ['a', 'b', ...])
+Function.prototype.myApply = function(_asThis, args) {
+  // 判断是否是undefined和null
+  if (typeof _asThis === 'undefined' || _asThis === null) {
+    _asThis = window
+  }
+  let fnSymbol = Symbol()
+  _asThis[fnSymbol] = this;  // 这里的 this 就是调用 apply 的函数 func
+  let fn = _asThis[fnSymbol] (...args);// 返回一个函数的执行
+  return fn
+}
+
+/**
+ * 手写一个 fn.bind(obj) (初级版本)
+ * return 一个fn
+ * @param {*} _asThis 
+ */
+Function.prototype.myBind = function(_asThis) {
+  // 判断是否是undefined和null
+      if (typeof _asThis === "undefined" || _asThis === null) {
+        _asThis = window;
+      }
+      fn = this; // 这里的 this 就是调用 bind 的函数 func
+      return function(...args) {
+        return fn.apply(_asThis, args);
+      }
+  }
+
 
   /**(中级版本)
  *  function add (){

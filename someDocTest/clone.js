@@ -1,3 +1,20 @@
+/**
+ * 深拷贝 完整版
+ * 关键点：=>
+ * 判断类型
+ * 返回创建实例对象的 Object 构造函数的引用constructor
+ * 枚举+递归
+ */
+ function cloneDeep(target) {
+     if(target == null || target !== 'object') return obj;
+     const newObj = new target.constructor(); //返回创建实例对象的 Object 构造函数的引用， 无需判断Function或ExpReg
+     for( let key in Object.getOwnPropertyDescriptor(target)){ // 获取直接赋予该对象的属性，不需要从原型链上进行查找的属性
+        newObj[key] = cloneDeep(target[key])
+     } 
+     return newObj
+ }
+
+
 // 手动写出一个浅克隆 --》
 // 创建一个新的对象，遍历需要克隆的对象，
 // 将需要克隆对象的属性依次添加到新对象上，
@@ -15,7 +32,7 @@ function clone(target) {
 // 如果是引用类型，创建一个新的对象，遍历需要克隆的对象，
 // 将需要克隆对象的属性执行深拷贝后依次添加到新对象上
 function cloneDeep(target) {
-     if (typeof target === 'object') {
+    if (typeof target === 'object') {
           let cloneTarget = {};
            for (const key in target) {
                 cloneTarget[key] = cloneDeep(target[key]);

@@ -6,3 +6,14 @@
 6. [var let const 区别--》es6全解](https://juejin.cn/post/6844903775329583112)
 7. [手写bind、手写深拷贝、手写 EventHub（发布-订阅）、手写 Promise](https://zhuanlan.zhihu.com/p/160315811)
 8. [手写Promise/Promise.all/Promise.race](https://zhuanlan.zhihu.com/p/196671665)
+9. [setState是同步的还是异步的理解](https://github.com/sisterAn/blog/issues/26)
+```
+总结
+- 如果是由React引发的事件处理（比如通过onClick引发的这类合成事件事件处理）或React的钩子函数（ComponentDidmount等），调用setState是异步的;
+- 除此之外的setState调用会同步执行this.state 。所谓“除此之外”，指的是绕过React通过addEventListener直接添加的事件处理函数，还有通过setTimeout/setInterval产生的异步调用。
+
+```
+```
+注意：
+setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
+```
