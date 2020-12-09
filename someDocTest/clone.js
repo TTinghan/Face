@@ -9,7 +9,7 @@
 const copy = JSON.parse(JSON.stringify(data)); // JSON不支持的类型都用不了
 
  function cloneDeep(target) {
-     if(target == null || target !== 'object') return target;
+     if(target == null || typeof target !== 'object') return target;
      const newObj = new target.constructor(); //返回创建实例对象的 Object 构造函数的引用， 无需判断Function或ExpReg
      for( let key in Object.getOwnPropertyDescriptor(target)){ // 获取直接赋予该对象的属性，不需要从原型链上进行查找的属性
         newObj[key] = cloneDeep(target[key])
@@ -22,7 +22,7 @@ const copy = JSON.parse(JSON.stringify(data)); // JSON不支持的类型都用�
 // 将需要克隆对象的属性依次添加到新对象上，
 // 返回。
 function clone(obj){
-    if(obj == null || obj !== 'object') return obj;
+    if(obj == null || typeof obj !== 'object') return obj;
     let cloneTarget = {};
     for(let key in obj) {
         cloneTarget[key] = obj[key]

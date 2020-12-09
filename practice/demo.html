@@ -51,6 +51,20 @@
          </div>
   </body>  
   <script>
+let promise = new Promise((resolve, reject)=>{
+    reject(1);
+})
+
+promise.then((val)=>{
+console.log('then1-1', val); // then1-1, 1
+}, (err)=>{
+    console.log('err1-1', err)
+})
+.then((val)=>{
+console.log('then2-2', val); 
+}, (err)=>{
+    console.log('err2-2', err)
+})
   // function rancolr() {
   //     var r = parseInt(Math.random() * 256);
   //     var g = parseInt(Math.random() * 256);
@@ -131,5 +145,5 @@
     // console.log(colorRgb('#fff'));
     // console.log(colorHex('rgb(150,01,89)'));
     </script>
-    <script src="./practice/test1.js"></script>
+    <!-- <script src="./practice/test1.js"></script> -->
 </html>

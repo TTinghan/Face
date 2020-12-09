@@ -56,6 +56,7 @@ function fb(n){
     return fb(n-1) + fb(n-2);
 }
 
+// 动态规划法 1,1,2,3,5,8,13.....
 // 时间复杂度为O(n)
 var fib = function(n) {
     if(n === 0) return 0
@@ -68,14 +69,6 @@ var fib = function(n) {
     return b
 };
 
-// 动态规划法 1,1,2,3,5,8,13.....
-function fibo(n) {
-  let [a, b] = [0, 1];
-  for(let i = 1; i < n; i++) {
-    [a, b] = [b, a + b]
-  }
-  return b;
-}
 
 // 实现n的阶乘 n! = n * (n-1)! 递归调用
 function mul(n){
@@ -127,6 +120,7 @@ Function.prototype.myApply = function(_asThis, args) {
   let fnSymbol = Symbol()
   _asThis[fnSymbol] = this;  // 这里的 this 就是调用 apply 的函数 func
   let fn = _asThis[fnSymbol] (...args);// 返回一个函数的执行
+  delete _asThis[fnSymbol];
   return fn
 }
 
@@ -140,7 +134,7 @@ Function.prototype.myBind = function(_asThis) {
       if (typeof _asThis === "undefined" || _asThis === null) {
         _asThis = window;
       }
-      fn = this; // 这里的 this 就是调用 bind 的函数 func
+      let fn = this; // 这里的 this 就是调用 bind 的函数 func
       return function(...args) {
         return fn.apply(_asThis, args);
       }
@@ -172,7 +166,7 @@ Function.prototype.myBind = function(_asThis) {
 
 // 手写一个slice
 Array.prototype.slice = function(start,end){
-    var result = new Array();
+    var result = new Array();// 创建一个新数组
     start = start || 0;
     end = end || this.length; //this指向调用的对象，当用了call后，能够改变this的指向，也就是指向传进来的对象，这是关键
     for(var i = start; i < end; i++){

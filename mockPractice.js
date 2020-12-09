@@ -45,40 +45,41 @@
     return lastStr
 }
 
-// 二分查找 使用递归
+// 二分查找 使用递归 有序数组
 // var arr = [0, 0, 1, 2, 3, 5, 4, 6, 7, 8]
 // console.log(binarySearch(1, arr, 0, arr.length-1)); 
-function binarySearch(target, arr, start, end) {
+function binarySearch(target, arr, start = 0, end = arr.length - 1) {
     if (start > end) {
       return -1
     }
     var mid = Math.floor((start + end) / 2);// 向下取整 不进位
     if (target === arr[mid]) {
-      return mid
+      return mid; // 查找成功，结束查找
     } else if (target < arr[mid]) {
       return binarySearch(target, arr, start, mid - 1)
     } else {
       return binarySearch(target, arr, mid + 1, end)
     }
-  }
-
-//   不使用递归
-// 有序的二分查找，返回-1或存在的数组下标。
-function binarySearch(target,arr) {
-    var start = 0;
-    var end = arr.length-1;
-    while (start<=end){
-        var mid = parseInt(start+(end-start)/2);
-        if(target==arr[mid]){
-            return mid;
-        }else if(target>arr[mid]){
-            start = mid+1;
-        }else{
-            end = mid-1;
-        }
-    }
-    return -1;
 }
+
+// 二分查找 使用循环 有序数组
+// var arr = [1, 4, 7, 8, 12, 34, 67, 88, 99, 100]
+// console.log(binarySearch(arr, 7));
+// 有序的二分查找，返回-1或存在的数组下标。
+function binarySearch(arr, target) {
+    let start = 0,
+        end = arr.length - 1;
+    while (start < end) {
+        let mid = Math.floor((start + end) / 2);
+        if (target === arr[mid]) {
+            return mid; // 查找成功，结束查找
+        } else if (target < arr[mid]) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        };
+    };
+};
 
 // 计算二叉树最大深度
 /**
@@ -150,4 +151,3 @@ const buildPath = (root, pathStr) => {
     buildPath(root.left, pathStr); // 基于当前的pathStr，递归左子树
     buildPath(root.right, pathStr); // 基于当前的pathStr，递归右子树
 };
-

@@ -102,3 +102,26 @@ function spawn (fn) {
 // 写一个 es6 的继承过程
 
 // 写一个大数相乘的解决方案。传两个字符串进来，返回一个字符串
+function mult(a, b){
+    var cn = a.length + b.length;
+    var c = new Array(cn).fill(0);
+    // 两两相乘，并放进不同的格子里，如果里面有东西，则相加
+    for(var i = 0; i < a.length; i++){
+      for(var j = 0; j < b.length; j++){
+         c[i+j+1] += Number( a[i] ) * Number( b[j] )
+      }
+    }
+   // 处理进位   
+    for(var i = cn-1; i >= 0; i--){
+      var carry = Math.trunc(c[i] / 10);
+      if(carry){
+        c[i-1] +=  carry
+      }
+      c[i] = c[i] % 10
+    }
+    while(c[0] === 0){
+        c.shift()
+    }
+    //处理最前面的零
+    return c.join('') || '0'
+  }
