@@ -1,3 +1,4 @@
+## kuaishou 一面
 1. 自我介绍。。。
 2. 用过小程序什么框架 taro和原生的区别
 3. 
@@ -22,7 +23,7 @@ fcuntion b(){
     var count = 10;
     return a();
 }
-console.log(b()); // 打印什么
+console.log(b()); // 打印什么？为什么，说下理由？
 
 ```
 
@@ -75,6 +76,17 @@ function merge (arr1, arr2){
     // TODO
 }
 ```
-6. 了解promise么？说下Promise.all与allSettled区别， Promise.all参数都可以是什么？
-7. 手写一个promise.all
-8. 你觉得让你印象最深刻的问题是什么？你是怎么解决的？
+6. 将字符串改为驼峰式：
+```
+'get-element-by-id'
+'getElementById'
+
+```
+7. 了解promise么？说下Promise.all与allSettled区别， Promise.all参数都可以是什么？
+- promise.all: 此实例在 iterable 参数内所有的 promise 都“完成（resolved）”或参数中不包含 promise 时回调完成（resolve）,如果参数中  promise 有一个失败（rejected），此实例回调失败（reject），失败的原因是第一个失败 promise 的结果。
+- promise.allSettled： 该方法返回一个在所有给定的promise已被决议或被拒绝后决议的promise，并带有一个对象数组，每个对象表示对应的promise结果。如果我们请求多个接口需要统计错误的次数，就可以用到此方法.
+
+8. 实现promise.all的pollify，上代码就完了。
+9. 你觉得让你印象最深刻的问题是什么？你是怎么解决的？
+
+## 二面

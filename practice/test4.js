@@ -112,7 +112,7 @@ function deep(root){ // 计算二叉树深度
     return Math.max(leftNode, rightNode);
 }
 
-// 对称树
+// 对称二叉树
 var isSymmetric = function(root) {
     function isMirror(r1,r2){
         //如果都为null 对称

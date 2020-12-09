@@ -5,7 +5,6 @@
  * acbbabc
  * @param {*} s 
  */
-
 var longestPalindrome = function(s) {
     let result = '';
     for (let i in s) {

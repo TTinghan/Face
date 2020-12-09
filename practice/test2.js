@@ -26,7 +26,7 @@ function curry(func) {
     return g;
 }
 
-// 手写lodash/flowRight(f,g) 是从右到左运行=> 函数组合f(g(x))
+// 手写lodash/flowRight(f,g) 是从右到左运行=> compose函数组合f(g(x))
 // 考点 reduce(fn) =>
 // reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。
 // reduce() 可以作为一个高阶函数，用于函数的 compose组合。
