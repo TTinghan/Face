@@ -1,5 +1,7 @@
 0. [React灵魂23问](https://zhuanlan.zhihu.com/p/304213203)
+   [详解React的生命周期](https://juejin.cn/post/6844903655372488712)
 1. [Webpack灵魂13问](https://zhuanlan.zhihu.com/p/44438844)
+   [webpack配置，优化](https://zhuanlan.zhihu.com/p/99959392)
 2. [十大经典排序js](https://juejin.cn/post/6844903444365443080)
 3. [es6-10 新特性一览](https://juejin.cn/post/6844903811622912014)
 4. [new一个类的时候，都发生了什么| 斐波那契数列|实现一个栈..手写和算法](https://juejin.cn/post/6844903575559077895)
@@ -18,7 +20,9 @@
 [react的diff 从O(n^3)到 O(n) ，请问 O(n^3) 和O(n) 是怎么算出来？](https://www.zhihu.com/question/66851503)
 [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c?utm_source=gold_browser_extension)
 16. [10 分钟理解 BFC 原理](https://zhuanlan.zhihu.com/p/25321647)
-17. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
+17. [通俗易懂的理解react-redux](https://www.zhihu.com/question/41312576/answer/90782136)
+    [react/redux/react-redux](https://juejin.cn/post/6844903624565325832)
+18. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
 
 #### 浏览器相关
 
@@ -26,36 +30,136 @@
 19. [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
 20. [浅聊HTTP缓存(HTTP Cache)](https://juejin.im/post/5bf3c28ee51d4514df5b7625?utm_source=gold_browser_extension)
 
+### 链表和数组的区别：
 ```
-链表和数组的区别：
-
 1. 内存的组织方式不同；
 2. 添加，删除，插入的时间复杂度不同O(1) / O(n);
 3. 链表支持动态扩容
 
 ```
+### Event Loop描述
+```
+浏览器中： 同步代码->异步的微任务->异步的宏任务
+
+先执行同步的代码按照执行顺序加入执行栈中
+遇到异步事件先将其挂起，待异步事件执行完将结果放在事件队列，但不会立刻执行其回调
+当前执行栈中的所有任务都执行完毕， 主线程处于闲置状态时，主线程会去查找事件队列是否有任务
+有，把这个事件对应的回调放入执行栈中，然后执行其中的同步代码...，如此反复轮循。
+
+node中：
+
+外部输入数据(connections)-->轮询阶段(poll)-->检查阶段(check)-->关闭事件回调阶段(close callback)-->
+定时器检测阶段(timer)-->I/O事件回调阶段(I/O callbacks)-->闲置阶段(idle, prepare)-->轮询阶段...
+
+这些阶段大致的功能如下：
+timers: 这个阶段执行定时器队列中的回调如 setTimeout() 和 setInterval()。
+I/O callbacks: 这个阶段执行几乎所有的回调。但是不包括close事件，定时器和setImmediate()的回调。
+idle, prepare: 这个阶段仅在内部使用，可以不必理会。
+poll: 等待新的I/O事件，node在一些特殊情况下会阻塞在这里。
+check: setImmediate()的回调会在这个阶段执行。
+close callbacks: 例如socket.on('close', ...)这种close事件的回调。
 
 ```
-react-redux 的原理，是怎么跟 react 关联起来的
-react-redux 的核心组件只有两个:
-Provider 和 connect=>
-Provider 存放 Redux 里 store 的数据到 context 里=>通过 connect 从 context 拿数据=>通过 props 传递给 connect 所包裹的组件。
+### react-router原理
+```
+```
+### react fiber（什么是fiber？）
+```
+旧版 React 通过递归的方式进行渲染，使用的是 JS 引擎自身的函数调用栈，它会一直执行到栈空为止。
+而Fiber实现了自己的组件调用栈，它以链表的形式遍历组件树，可以灵活的暂停、继续和丢弃执行的任务。
 
-```
-```
-总结
-- 如果是由React引发的事件处理（比如通过onClick引发的这类合成事件事件处理）或React的钩子函数（ComponentDidmount等），调用setState是异步的;
-- 除此之外的setState调用会同步执行this.state 。所谓“除此之外”，指的是绕过React通过addEventListener直接添加的事件处理函数，还有通过setTimeout/setInterval产生的异步调用。
+Fiber Reconciler 在执行过程中，会分为 2 个阶段：
+1. 阶段一，生成 Fiber 树（链表），得出需要更新的节点信息存放在effectList中。这一步是一个渐进的过程，可以被打断。
+阶段一可被打断的特性，让优先级更高的任务先执行，从框架层面大大降低了页面掉帧的概率。
+2. 阶段二，将需要更新的节点一次过批量更新，这个过程不能被打断。
 
-```
-
-```
-注意：
-setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，当然可以通过第二个参数 setState(partialState, callback) 中的callback拿到更新后的结果。
+注意Fiber Reconciler每执行一段时间，都会将控制权交回给浏览器，可以分段执行，这时候需要一个调度器（Scheduler）来进行任务分配
 ```
 
+### react-redux 的原理，是怎么跟 react 关联起来的
 ```
-new 一个实例化对象的过程，发生了什么 =>
+为什么需要redux: react的state数据总是单向从顶层向下分发的。
+
+react-redux 最重要的两个方法就是Provider和connect。
+Provider把redux的相关store、reducer注册到App里面，实现store的全局访问。
+connect这个高阶函数连接容器组件和UI组件，通过mapStateToProps从Redux状态树中提取需要的部分作为props传递给当前的组件。
+mapDispatchToProps将需要绑定的响应事件（action）作为props传递到组件上。
+-----------------------------------------------------
+Redux将React组件分为容器型组件和展示型组件
+容器型组件--> 一般通过connect函数生成，它订阅了全局状态的变化，通过mapStateToProps函数，可以对全局状态进行过滤
+【mapStateToProps 函数指定如何把当前 Redux store state 映射到展示组件的 props 中】
+【mapDispatchToProps 方法接收 dispatch() 方法并返回期望注入到展示组件的 props 中的回调方法。】
+
+展示型组件--> 不直接从global state获取数据，其数据来源于父组件
+
+把所有的reducers绑在一起用combineReducers。
+
+```
+
+### redux如何做异步处理？怎么才能 Reducer 在异步操作结束后自动执行？中间件（Middleware ）的实现？
+```
+在 Redux 中同步的表现就是：Action 发出以后，Reducer 立即算出 State。
+那么异步的表现就是：Action 发出以后，过一段时间再执行 Reducer。
+
+-- 如何做的异步操作： 用 Redux 处理异步，可以自己写中间件来处理，当然大多数人会选择一些现成的支持异步处理的中间件。比如 redux-thunk 或 redux-promise 。
+-- 中间件：所以中间件简单来说，就是对 store.dispatch 方法进行一些改造的函数。
+--------------------------------------------------
+Redux 提供了一个 applyMiddleware 方法来应用中间件：
+这个方法主要就是把所有的中间件组成一个数组，依次执行。也就是说，任何被发送到 store 的 action 现在都会经过thunk，promise，logger 这几个中间件了。
+
+```
+
+### redux-thunk(redux的中间件middleware 处理异步Action)
+```
+function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) => next => action => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);// 触发一个action，同时传入dispatch和getState
+    }
+    return next(action);// 执行下一个中间件
+  };
+}
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+export default thunk;
+
+```
+### setState是同步的还是异步的？
+```
+合成事件中是异步(onCLick,onChange)
+钩子函数中的是异步(componentDidmount)
+原生事件中是同步(addEventListener)
+setTimeout中是同步
+
+原因：React在调用事件处理函数之前就会调用这个batchedUpdates，这个函数会把isBatchingUpdates修改为true，这时更新的操作会被放到dirtyComponents 数组中，isBatchingUpdates 默认为 false 时，所有队列中更新执行batchUpdate。
+
+- setState的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和钩子函数的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”.
+
+```
+
+### setState机制以及后续逻辑：
+```
+首先: React 是通过管理状态来实现对组件的管理，即使用 this.state 获取 state，通过 this.setState() 来更新 state，当使用 this.setState() 时，React 会调用 render 方法来重新渲染 UI。
+其次: setState存在一个队列机制异步更新，当调用 setState 时，实际上是会执行 enqueueSetState 方法，并会对 partialState 及 _pendingStateQueue 队列进行合并操作，最终通过 enqueueUpdate 执行 state 更新。
+而 performUpdateIfNecessary 获取 _pendingElement、 _pendingStateQueue、_pendingForceUpdate，并调用 reactiveComponent 和 updateComponent 来进行组件更新。
+```
+### react的父子组件的state变化如何影响子组件的？
+```
+具体是这样的：
+setState之后，会把当前的component放到dirtyComponents = [], 在batchUpateTransaction的close阶段，遍历dirtyComponents，对状态发生改变的Component进行update，该Component执行render方法，可以得到renderedElement，然后renderedElement进行递归的update，这样子组件就会re-render，根据当前的props得到新的markup，这样整个虚拟DOM树就进行了更新
+
+```
+
+### react与hook区别 && 比较
+[react与hook优缺点](https://zhuanlan.zhihu.com/p/88593858)
+```
+类（class）是数据和逻辑的封装。 也就是说，组件的状态和操作方法是封装在一起的。如果选择了类的写法，就应该把相关的数据和操作，都写在同一个 class 里面。
+
+函数一般来说，只应该做一件事，就是返回组件的 HTML 代码。 如果你有多个操作，每个操作应该写成一个单独的函数。而且，数据的状态应该与操作方法分离。函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。
+```
+
+### new 一个实例化对象的过程，发生了什么
+```
  new运算符的执行过程
     新生成一个对象
     链接到原型: obj.__proto__ = Con.prototype
@@ -69,25 +173,59 @@ new 一个实例化对象的过程，发生了什么 =>
     }
 
 ```
+### commonJS 与 ES6 的三大区别？
 ```
-commonJS的require,exports
-模块加载时执行，脚本代码在require的时候就会全部执行，如果发现”循环加载“，就只输出已经执行的部分，还未执行的不会加载。
+1. commonJS的require是对值的拷贝，ES6模块输出的是值的引用,import模块是动态引用，并且不会缓存值。
+2. commonJS的module.exports： 运行时加载因为这个模块是一个对象，ES6是编译时执行，export模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成；
+3. CommonJS模块的require：同步加载模块，ES6 模块的import命令是异步加载，有一个独立的模块依赖的解析阶段。
 
-ES6的import, export
-动态引用，import导入的模块是一个指向被加载模块的引用
+对于循环引用都是如何处理的？：
+commonJS: 执行模块中的代码并缓存执行的结果，当下次再次加载时不会重复执行，而是直接取缓存的结果。
+ES6: 不会再去执行重复加载的模块，又由于 ES6 动态输出绑定的特性，能保证 ES6 在任何时候都能获取其它模块当前的最新值。
 
 ```
-```
-webpack 原理
 
-- 1. 初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数；
-- 2. 开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译；
-- 3. 确定入口：根据配置中的 entry 找出所有的入口文件；
-- 4. 编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理；
-- 5. 完成模块编译：在经过第 4 步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系；
-- 6. 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会；
-- 7. 输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
+### webpack 工作流程(编译流程)
 ```
+初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数；
+开始编译：用得到的参数初始化全局唯一的compiler对象，加载插件，调用插件的apply方法，并将compiler实例传递给插件
+确定入口：根据配置中的 entry 找出所有的入口文件，为每一个entry实例化一个entryplugin，为递归解析做准备工作；
+编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理；
+完成模块编译：使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系；
+输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表；
+输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
+
+在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果。
+
+```
+
+### webpack 性能优化：
+```
+Tree Shaking：删除死代码 通过在启动webpack时追加参数--optimize-minimize来实现
+压缩代码（css/js）:应用相应的plugin插件 （css-minimizer-webpack-plugin、uglifyjs-webpack-plugin）
+提取公共代码：应用相应的plugin插件（commons-chunk-plugin）
+
+```
+### node怎么捕获异常？哪些异常能被捕获到，哪些异常不能被捕获到
+```
+node中的异常分为系统异常，js异常，throw抛出的异常，断言错误assert模块抛出的。
+
+【可以捕获到的异常】：
+同步API-> 所有的 JavaScript 错误和大部分同步API 都用 try / catch 机制处理
+
+异步API->
+1. 异步API回调函数的(err)=>{};
+2. connection.on('error', (err) => { //EventEmitter 类型对象-> 绑定 error 事件
+  console.error(err);// 处理 err
+});
+3. process.on('uncaughtException', (err) => {
+    console.log(err);// 抛出的异常;
+})
+
+【不可以捕获到的】 异步回调中的try/catch的异常->因回调函数还没有执行，try / catch 代码已经执行完毕并退出，所以无法捕获错误
+
+```
+
 ```
 babel原理（es6 => es5解析过程） babel 的转译过程分为三个阶段：parsing、transforming、generating
 
@@ -122,34 +260,6 @@ redux-> reactComponents->store.dispatch(Action)-> store -><-(Reducers)
   单一数据源
   state是只读的，State 不能被自身修改，只能由特定的 action 引起变化
   用纯函数进行修改
-
-```
-
-```
-redux如何做异步处理？怎么才能 Reducer 在异步操作结束后自动执行？中间件（Middleware ）的实现？
-
-在 Redux 中同步的表现就是：Action 发出以后，Reducer 立即算出 State。
-那么异步的表现就是：Action 发出以后，过一段时间再执行 Reducer。
-
--- 如何做的异步操作： 用 Redux 处理异步，可以自己写中间件来处理，当然大多数人会选择一些现成的支持异步处理的中间件。比如 redux-thunk 或 redux-promise 。
--- 中间件：所以中间件简单来说，就是对 store.dispatch 方法进行一些改造的函数。
---------------------------------------------------
-Redux 提供了一个 applyMiddleware 方法来应用中间件：
-这个方法主要就是把所有的中间件组成一个数组，依次执行。也就是说，任何被发送到 store 的 action 现在都会经过thunk，promise，logger 这几个中间件了。
-
-```
-```
-react-redux怎样实现react与redux的数据关联的？
-
-把 redux 的相关 store、reducer 通过 Provider 注册到 App 里面，这样子组件就可以拿到 store 了。
-把所有的reducers绑在一起用combineReducers，简单来说，react-redux 就是多了个 connect 方法连接容器组件和UI组件，这里的“连接”就是一种映射： mapStateToProps 把容器组件的 state 映射到UI组件的 props mapDispatchToProps 把UI组件的事件映射到 dispatch 方法。
------------------------------------------------------
--- Redux将React组件分为容器型组件和展示型组件
-容器型组件--> 一般通过connect函数生成，它订阅了全局状态的变化，通过mapStateToProps函数，可以对全局状态进行过滤
-【mapStateToProps 函数指定如何把当前 Redux store state 映射到展示组件的 props 中】
-【mapDispatchToProps 方法接收 dispatch() 方法并返回期望注入到展示组件的 props 中的回调方法。】
-
-展示型组件--> 不直接从global state获取数据，其数据来源于父组件
 
 ```
 
@@ -189,7 +299,7 @@ style-loader => 将 JS 字符串生成为 style 节点
 文件：
 raw-loader => 可以将文件以字符串的形式返回
 file-loader => 解析项目中的url引入（不仅限于css）
-url-loader => 对于image图片的转化, url-loader提供了一个limit参数，小于limit字节的文件会被转为DataURl。
+url-loader => 对于image图片的转化, url-loader提供了一个limit参数，小于limit字节的文件会被转为DataURl，不小的会转为.jpg的url。
 
 编译：
 babel-loader => 将es6的语法转成es5
@@ -197,13 +307,18 @@ vue-loader =>
 ts-loader
 
 校验：
-eslint-loader
+eslint-loader => 通过 ESLint 检查 JavaScript 代码
 
 ```
 
 - plugin: 
 ```
-html-webpack-plugin: 生成一个默认的html文件。
-mini-css-extract-plugin: 把js中import导入的样式文件代码，打包成一个实际的css文件，结合html-webpack-plugin，在 dist/index.html 中以link插入css文件；默认将js中import的多个css文件，打包时合成一个。
+html-webpack-plugin=>  生成一个默认的html文件。
+mini-css-extract-plugin=>  把js中import导入的样式文件代码，打包成一个实际的css文件，结合html-webpack-plugin，在 dist/index.html 中以link插入css文件；默认将js中import的多个css文件，打包时合成一个。
+
+define-plugin=> 定义环境变量
+commons-chunk-plugin=> 提取公共代码
+uglifyjs-webpack-plugin=> 通过UglifyES压缩ES6代码
+（cssnano） + css-minimizer-webpack-plugin-->压缩css代码
 
 ```
