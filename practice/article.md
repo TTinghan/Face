@@ -19,11 +19,12 @@
 [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c?utm_source=gold_browser_extension)
 16. [10 分钟理解 BFC 原理](https://zhuanlan.zhihu.com/p/25321647)
 17. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
-18. 
+
 #### 浏览器相关
-[COOKIE和SESSION有什么区别？](https://www.zhihu.com/question/19786827)
-[深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
-[浅聊HTTP缓存(HTTP Cache)](https://juejin.im/post/5bf3c28ee51d4514df5b7625?utm_source=gold_browser_extension)
+
+18. [COOKIE和SESSION有什么区别？](https://www.zhihu.com/question/19786827)
+19. [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
+20. [浅聊HTTP缓存(HTTP Cache)](https://juejin.im/post/5bf3c28ee51d4514df5b7625?utm_source=gold_browser_extension)
 
 ```
 链表和数组的区别：
