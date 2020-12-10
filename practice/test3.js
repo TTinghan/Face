@@ -32,3 +32,51 @@ var longestPalindrome = function(s) {
 function isPalindrome (s) {
     return s.toString() === s.toString().split('').reverse().join('');
 }
+
+// 单向链表的反转  1 → 2 → 3 → Ø，把它改成 Ø ← 1 ← 2 ← 3
+// 输入：1->2->3->NULL    
+// 输出：3->2->1->NULL
+function reverseList(head){
+    let pre = null; // pre指向null
+    let cur = head; // cur指向head(1)链表
+    while(cur !== null){
+        let nextTemp = cur.next;// nextTemp指向cur的下一个节点
+        cur.next = pre;// 指向null
+        pre = cur;
+        cur = nextTemp;
+    }
+    return pre;
+}
+
+// 判断链表是否有环
+function hasCircle(head){
+    let map = new Map();
+    while(head) {
+        // 判断map中以这个结点为键名的值是否为 true
+        if(map.get(head) === true){
+            // 说明这个结点重复出现了两次，即这个链表有环
+            return true;
+        }else {
+            // 遍历链表的过程中把整个结点当作键名放入到 map 中，并把它标记为 true 代表这个结点已经出现过
+            map.set(head, true)
+        }
+        head = head.next;// 链表中每个结点
+    }
+    return false;
+}
+
+// 普通链表转为双向链表
+function doubleLinkedList(head){
+    let pre = null;
+    let cur = head;
+    while(cur) {
+        cur.pre = pre;
+        pre = cur;
+        cur = cur.next;
+    }
+    return pre;
+}
+
+// 数组nums中是否存在三个元素a,b,c 使得他们的和为N,找出所有满足条件的三元集合
+// 如：nums=[-1, 0, 1, 2, 01, -4] -> [-1, 0, 1] [-1, -1, 2]
+

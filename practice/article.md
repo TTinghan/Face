@@ -1,9 +1,9 @@
 0. [React灵魂23问](https://zhuanlan.zhihu.com/p/304213203)
-1. [十大经典排序js](https://juejin.cn/post/6844903444365443080)
-2. [es6-10 新特性一览](https://juejin.cn/post/6844903811622912014)
-3. [new一个类的时候，都发生了什么| 斐波那契数列|实现一个栈..手写和算法](https://juejin.cn/post/6844903575559077895)
-4. [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A)
-5. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
+1. [Webpack灵魂13问](https://zhuanlan.zhihu.com/p/44438844)
+2. [十大经典排序js](https://juejin.cn/post/6844903444365443080)
+3. [es6-10 新特性一览](https://juejin.cn/post/6844903811622912014)
+4. [new一个类的时候，都发生了什么| 斐波那契数列|实现一个栈..手写和算法](https://juejin.cn/post/6844903575559077895)
+5. [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A)
 6. [var let const 区别--》es6全解](https://juejin.cn/post/6844903775329583112)
 7. [手写bind、手写深拷贝、手写 EventHub（发布-订阅）、手写 Promise](https://zhuanlan.zhihu.com/p/160315811)
 8. [手写Promise/Promise.all/Promise.race](https://zhuanlan.zhihu.com/p/196671665)
@@ -18,12 +18,21 @@
 [react的diff 从O(n^3)到 O(n) ，请问 O(n^3) 和O(n) 是怎么算出来？](https://www.zhihu.com/question/66851503)
 [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.im/post/5c8e5e4951882545c109ae9c?utm_source=gold_browser_extension)
 16. [10 分钟理解 BFC 原理](https://zhuanlan.zhihu.com/p/25321647)
-17. 
+17. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
+18. 
 #### 浏览器相关
 [COOKIE和SESSION有什么区别？](https://www.zhihu.com/question/19786827)
 [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
 [浅聊HTTP缓存(HTTP Cache)](https://juejin.im/post/5bf3c28ee51d4514df5b7625?utm_source=gold_browser_extension)
 
+```
+链表和数组的区别：
+
+1. 内存的组织方式不同；
+2. 添加，删除，插入的时间复杂度不同O(1) / O(n);
+3. 链表支持动态扩容
+
+```
 
 ```
 react-redux 的原理，是怎么跟 react 关联起来的
