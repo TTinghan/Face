@@ -62,6 +62,8 @@ close callbacks: 例如socket.on('close', ...)这种close事件的回调。
 ```
 ### react-router原理
 ```
+当我们的路由发生变化时，Router中所监听的history函数将会触发，返回新的location对象，这时将会触发Router的setState，然后对应所有绑定Router的Route都将会重新渲染判断是否命中路由来进行重新渲染。
+
 ```
 ### react fiber（什么是fiber？）
 ```
@@ -199,11 +201,37 @@ ES6: 不会再去执行重复加载的模块，又由于 ES6 动态输出绑定�
 
 ```
 
-### webpack 性能优化：
+### 优化webpack配置：
 ```
-Tree Shaking：删除死代码 通过在启动webpack时追加参数--optimize-minimize来实现
-压缩代码（css/js）:应用相应的plugin插件 （css-minimizer-webpack-plugin、uglifyjs-webpack-plugin）
-提取公共代码：应用相应的plugin插件（commons-chunk-plugin）
+1.  优化打包速度
+减小import导入文件的搜索范围，别名(alias)的配置
+include exclude也可以减少webpack loader的搜索转换时间
+import jq from 'jquery'时配置noParse属性,告诉webpack不必解析，jq这个库是否有依赖其他的包
+2. 使用HappyPack开启多进程Loader转换
+HappyPack的基本原理是将这部分任务分解到多个子进程中去并行处理，子进程处理完成后把结果发送到主进程中，从而减少总的构建时间
+3. 优化代码的压缩时间
+webpack-parallel-uglify-plugin 增强代码压缩
+4. 抽离第三方模块
+将不经常会变更的静态依赖文件elementUi、vue全家桶等等使用webpack内置的DllPlugin DllReferencePlugin进行抽离，避免不必要的打包
+5. 配置缓存
+构建都会把所有的文件都重复编译一遍，避免这样的操作在支持缓存的loader中配置cache项，不支持缓存的loader使用cache-loader
+6. 优化打包文件体积
+引入webpack-bundle-analyzer分析打包后的文件
+7. Tree-shaking清除代码中无用的部分 通过在启动webpack时追加参数--optimize-minimize来实现
+坑点1：目前在webpack4 我们设置mode为production的时候已经自动开启了tree-shaking。但是要想使其生效，生成的代码必须是ES6模块！！！不能使用其它类型的模块如CommonJS之流。
+坑点2：使用Babel的话，因为Babel的预案（preset）默认会将任何模块类型都转译成CommonJS类型
+
+解决办法: 在.babelrc文件或在webpack.config.js文件中设置modules： false就好了
+// .babelrc
+{
+  "presets": [
+    ["@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
+  ]
+}
 
 ```
 ### node怎么捕获异常？哪些异常能被捕获到，哪些异常不能被捕获到
