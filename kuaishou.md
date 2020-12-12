@@ -90,3 +90,30 @@ function merge (arr1, arr2){
 9. 你觉得让你印象最深刻的问题是什么？你是怎么解决的？
 
 ## 二面
+
+1. 自我介绍
+2. 说说在做项目的过程中给自己印象深刻的两个问题，都是如何解决的？
+3. 本专业应该不会涉及前端内容知识，说下你是如何学习前端的？
+4. 写一个两个数组合并 [1,3,5,7], [0,2,4,6] =>[0,1,2,3,4,5,6];
+并说说你实现的时间复杂度是多少？
+```
+function merge (arr1, arr2){
+    let newArr = [];
+    while(arr1.length && arr2.length){
+        if(arr1[0] > arr2[0]){
+            newArr.push(arr2.shift())
+        }else {
+            newArr.push(arr1.shift())
+        }
+    }
+    while(arr2.length === 0){
+        newArr.push(arr1.shift())
+    }
+    while(arr1.length === 0){
+        newArr.push(arr2.shift())
+    }
+}
+```
+5. 说说对于数组和链表的区别
+你觉得数组的底层是用什么实现的？是数组还是其他数据结构？
+6. 假设你所处在一个非常复杂的web工程，由上百人开发，工程中有大量的html，js，css，图像，工程编译发布后是一个完整的网站（比如Facebook主站）。请问用哪种数据结构可以比较准确的描述工程下所有静态资源之间的依赖关系？--->用有向图~

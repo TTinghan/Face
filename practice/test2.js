@@ -100,6 +100,18 @@ function spawn (fn) {
 }
 
 // 写一个 es6 的继承过程
+function _inherits(Child, Parent){
+    // Object.create
+    Child.prototype = Object.create(Parent.prototype);
+    // __proto__
+    // Child.prototype.__proto__ = Parent.prototype;
+    Child.prototype.constructor = Child;
+    // ES6
+    // Object.setPrototypeOf(Child, Parent);
+    // __proto__
+    Child.__proto__ = Parent;
+}
+_inherits(Child,  Parent);
 
 // 写一个大数相乘的解决方案。传两个字符串进来，返回一个字符串
 function mult(a, b){

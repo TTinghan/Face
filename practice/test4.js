@@ -103,7 +103,7 @@ var isBalanced = function(root) {
     if(Math.abs(deep(root.left) - deep(root.right)) > 1) { // 比较深度
         return false
     }
-    return isBalanced(root.left) && isBalanced(root.left);
+    return isBalanced(root.left) && isBalanced(root.right);
 };
 function deep(root){ // 计算二叉树深度
     if(!root) return 0;

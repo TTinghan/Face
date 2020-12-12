@@ -98,6 +98,23 @@ sayHelloTo.apply(John, ['Bar']); // John say hello to Bar
 var say = sayHelloTo.bind(Foo); // Foo say hello to ABC
 say('ABC');
 
+// 手写instanceOf 
+// object instanceof constructor 返回布尔值
+// instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
+function myInstanceof(left, right) {
+    if(left == null || typeof left !== 'object') {
+        return false
+    }
+    let proto = Object.getPrototypeOf(left);
+    while(proto) {
+        if(proto === right.prototype) {
+            return true
+        }
+        proto = Object.getPrototypeOf(proto)
+    }
+    return false;
+}
+
 // 手写一个 fn.call(obj, 'a', 'b', ...)
 Function.prototype.myCall = function(_asThis, ...args) {
   // 判断是否是undefined和null
