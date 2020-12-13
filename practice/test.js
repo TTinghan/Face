@@ -190,6 +190,32 @@ function reverseList(head){
    return pre;
 }
 
+function deletNode(head, val){
+    if(head.val == val){
+        return head.next;
+    }
+    head.next = deletNode(head.next, val);
+    return head;
+}
+
+/**
+ * 时间复杂度：O(N)O(N)，其中N为两个链表节点总数
+   空间复杂度：O(1)O(1)
+ * @param {*} l1 
+ * @param {*} l2 
+ */
+var mergeTwoLists = function(l1, l2) {
+    if (l1 === null) return l2;
+    if (l2 === null) return l1;
+    if (l1.val < l2.val) {
+      l1.next = mergeTwoLists(l1.next, l2);
+      return l1;
+    } else {
+      l2.next = mergeTwoLists(l1, l2.next);
+      return l2;
+    }
+};
+
 function hasCircle(head){
     let map = new Map();
     while(head){
@@ -202,3 +228,54 @@ function hasCircle(head){
     }
     return false;
 }
+
+/**
+ * 判断是不是对称二叉树
+ * 返回布尔值
+ */
+function isSymmetric(root){
+    function isMirror(r1, r2){
+        if(!r1 && !r2) return true;
+        if(!r1 || !r2) return false;
+        return r1.val === r2.val && isMirror(r1.left, r2.right) && isMirror(r1.right, r2.left);
+    }
+    isMirror(root, root);
+}
+/**
+ * 返回一个 镜像树
+ * @param {*} root 
+ */
+function mirrorTree(root){
+    if(!root){
+        return root;
+    }
+    mirrorTree(root.left);
+    mirrorTree(root.right);
+    [root.left, root.right] = [root.right, root.left];
+    return root;
+}
+// 计算表达式中左右括号匹配的对数，以及落单的左括号个数，右括号个数
+// 例：
+// 输入："1*2+(3+3)())))(((("
+// 输出：2 4 3（三个结果空格隔开）
+function itemTimes(s){
+    let left = [];
+    let right = [];
+    let compose = 0;
+    for(let i = 0; i < s.length; i++){
+       switch(s[i]){
+           case '(':
+            left.push(s[i]);
+            break;
+           case ')':
+           if(left.length === 0){
+               right.push(s[i])
+           }else {
+               left.pop();
+               compose ++;
+           }
+       }
+    }
+    return `${compose} ${left.length} ${right.length}`
+}
+

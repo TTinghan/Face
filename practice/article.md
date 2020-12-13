@@ -29,6 +29,16 @@
 18. [COOKIE和SESSION有什么区别？](https://www.zhihu.com/question/19786827)
 19. [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
 20. [浅聊HTTP缓存(HTTP Cache)](https://juejin.im/post/5bf3c28ee51d4514df5b7625?utm_source=gold_browser_extension)
+21. [如何计算数据结构的时间复杂度](https://www.jianshu.com/p/f4cca5ce055a)
+22. [计算时间&空间复杂度](https://blog.csdn.net/zolalad/article/details/11848739)
+
+### 为什么是三次握手，四次挥手？
+因为三次握手才能保证双方具有接收和发送的能力
+三次握手：
+才可以阻止历史重复连接的初始化（主要原因）才可以同步双方的初始序列号 才可以避免资源浪费
+
+四次挥手：
+服务端通常需要等待完成数据的发送和处理，所以服务端的 ACK 和FIN 一般都会分开发送，从而比三次握手导致多了一次
 
 ### 链表和数组的区别：
 ```
@@ -173,7 +183,7 @@ setState之后，会把当前的component放到dirtyComponents = [], 在batchUpa
 
     function myNew(Con, ...args) {
         let obj = Object.create(Con.prototype)
-        let result = Con.apply(obj, args)
+        let result = Con.apply(obj, args);// 改变this指向
         return typeof obj === 'object' ? result : obj
     }
 

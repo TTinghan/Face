@@ -63,7 +63,7 @@ function arrUnique(nums = []) {
         return;
     }
     nums = nums.sort();// 将数组排好正序
-    let array = [nums[0]];
+    let array = [].concat(nums[0]);
     // 从第二个开始 顺序与前一个进行比较，如果不相同就push
     for(let i=1; i<nums.length; i++) {
         if(nums[i] !== nums[i-1]) {

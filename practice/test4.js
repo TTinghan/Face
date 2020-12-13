@@ -131,6 +131,17 @@ var isSymmetric = function(root) {
     return isMirror(root,root)
 };
 
+// 二叉树镜像
+function mirrorTree(root){
+    if(!root) {
+        return root;// 如果是[],就返回[]
+    }
+    mirrorTree(root.left); // 递归所有左子树
+    mirrorTree(root.right); // 递归所有右子树
+    [root.left, root.right] = [root.right, root.left];// 左右交换
+    return root; // 返回最后的树
+}
+
 // 二叉树路径
 // 返回所有从根节点到叶子节点的路径
 const binaryTreePaths = (root) => {

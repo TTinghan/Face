@@ -51,6 +51,35 @@
          </div>
   </body>  
   <script>
+    var checkValidString = function(s) {
+    let left = [];
+    let star = [];
+    for(let i = 0; i < s.length; i++){
+        switch(s[i]){
+            case '(':
+                left.push(s[i]);
+                break;
+            case '*':
+                star.push(s[i]);
+                break;
+            case ')':
+            if(left.length == 0){
+                if(star.length == 0) return false;
+                star.pop();
+            }else {
+                left.pop();
+            }
+            break;
+        }
+    }
+    if(left.length > star.length) return false;
+    while(left.length && star.length){
+        if(left.pop() > star.pop()){
+            return false;
+        }
+    }
+    return true;
+};
 // let promise = new Promise((resolve, reject)=>{
 //     reject(1);
 // })

@@ -50,6 +50,8 @@ require与import的区别
 受影响的函数：将需要更新lodash.merge，lodash.mergeWith，lodash-cli和lodash-es软件包
 在 Lodash 更新到 4.17.5 或更高版本之后，这个问题可以得到解决： https://www.infoq.cn/article/k7C-ZvXKOHh284ToEy9K/
 19. 对于后端超大数据量的请求，没有做分页处理，前端应该怎么办？
+20. App客户端和h5之间是如何通信的？
+参考博客：https://www.jianshu.com/p/fb3f17d59500
 
 
 ### 三面
