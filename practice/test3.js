@@ -1,82 +1,120 @@
-// 一些常见算法
+// 一些常见算法 参考：https://zhuanlan.zhihu.com/p/28130533
 
-/** 
- * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
- * acbbabc
- * @param {*} s 
- */
-var longestPalindrome = function(s) {
-    let result = '';
-    for (let i in s) {
-        var lastIndex = s.lastIndexOf(s[i]);// 最后出现的index
-        while (lastIndex >= i) {
-            const splitedString = s.slice(i, lastIndex + 1);// 截取子回文str
-            if (isPalindrome(splitedString)) { // 判断这子段是不是回文
-                if (result.length < splitedString.length) { // 找到那个长度最长的回文子序列
-                    result = splitedString;
-                } else {
-                    break;
-                }
-            } else {
-                lastIndex = s.slice(0, lastIndex).lastIndexOf(s[i]);// 找到
+// 冒泡排序 
+// bubbleSort([1,4,2,3,5,7,6,8,9])
+//--> [1, 2, 3, 4, 5, 6, 7, 8, 9]
+function bubbleSort(arr){
+    let stop;
+    let len = arr.length;
+    for(let i = 0; i <len; i++){
+        stop = len - i - 1;
+        for(let j = 0;  j < stop; j++){
+            if(arr[j] > arr[j + 1]){
+                swap(arr, j, j+1);
             }
         }
     }
-    return result;
-};
-
-/**
- * 是不是回文字符串 Palindrome
- * @param {*} s 
- */
-function isPalindrome (s) {
-    return s.toString() === s.toString().split('').reverse().join('');
+    return arr;
+}
+function swap(arr, index1, index2){
+    let temp = arr[index1];
+    arr[index1] = arr[index2];
+    arr[index2] = temp;
 }
 
-// 单向链表的反转  1 → 2 → 3 → Ø，把它改成 Ø ← 1 ← 2 ← 3
-// 输入：1->2->3->NULL    
-// 输出：3->2->1->NULL
-function reverseList(head){
-    let pre = null; // pre指向null
-    let cur = head; // cur指向head(1)链表
-    while(cur !== null){
-        let nextTemp = cur.next;// nextTemp指向cur的下一个节点
-        cur.next = pre;// 指向null
-        pre = cur;
-        cur = nextTemp;
-    }
-    return pre;
-}
-
-// 判断链表是否有环
-function hasCircle(head){
-    let map = new Map();
-    while(head) {
-        // 判断map中以这个结点为键名的值是否为 true
-        if(map.get(head) === true){
-            // 说明这个结点重复出现了两次，即这个链表有环
-            return true;
-        }else {
-            // 遍历链表的过程中把整个结点当作键名放入到 map 中，并把它标记为 true 代表这个结点已经出现过
-            map.set(head, true)
+// 选择排序
+// selectionSort([1,4,3,2,5,7,6,8])
+// [1, 2, 3, 4, 5, 6, 7, 8]
+function selectionSort(arr){
+    let len = arr.length;
+    let min;// 最小值的索引
+    for(let i = 0; i < len; i++){
+        min = i;
+        for(let j = i+1; j < len; j++){
+            if(arr[j] < arr[min]){
+                min = j;// 保存遍历过程中更小的索引值
+            }
         }
-        head = head.next;// 链表中每个结点
+        if(i !== min){
+            swap(arr, i, min);// 交换两个值得位置
+        }
     }
-    return false;
+    return arr;
+}
+function swap(arr, index1, index2){
+    let temp = arr[index1];
+    arr[index1] = arr[index2];
+    arr[index2] = temp;
 }
 
-// 普通链表转为双向链表
-function doubleLinkedList(head){
-    let pre = null;
-    let cur = head;
-    while(cur) {
-        cur.pre = pre;
-        pre = cur;
-        cur = cur.next;
+// 插入排序
+// insertionSort([1,4,2,3,6,5,7,9,8])
+// [1, 2, 3, 4, 5, 6, 7, 8, 9]
+function insertionSort(arr){
+    let len = arr.length;
+    let value;
+    let j;
+    for(let i = 0; i < len; i++){
+        value = arr[i];
+        for(j = i - 1; j > -1 && arr[j] > value; j--){
+            arr[j + 1] = arr[j];
+        }
+        arr[j + 1] = value;
     }
-    return pre;
+    return arr;
 }
 
-// 数组nums中是否存在三个元素a,b,c 使得他们的和为N,找出所有满足条件的三元集合
-// 如：nums=[-1, 0, 1, 2, 01, -4] -> [-1, 0, 1] [-1, -1, 2]
+// 归并排序
+// mergeSort([1,4,2,3,6,9,7,8])
+// [1, 2, 3, 4, 6, 7, 8, 9]
+function mergeSort(myArray) {
+    if (myArray.length < 2) { // 只有一个数的时候退出递归 ->结束条件
+        return myArray;
+    }
+    var middle = Math.floor(myArray.length / 2),
+        left = myArray.slice(0, middle),
+        right = myArray.slice(middle);
+    return merge(mergeSort(left), mergeSort(right)); // 递归 不断拆分只到一个数组只有一个数
+}
+
+function merge(left, right) {
+    var result = [],
+        left_index = 0,
+        right_index = 0;
+    // 将两个数组合并
+    // 合并的时候按从小到大的顺序
+    while (left_index < left.length && right_index < right.length) {
+        if (left[left_index] < right[right_index]) {
+            result.push(left[left_index++]);
+        } else {
+            result.push(right[right_index++]);
+        }
+    }
+    // 和其他数组拼接
+    return result.concat(left.slice(left_index)).concat(right.slice(right_index));
+}
+
+// 快速排序
+// quickSort([1,4,2,5,6,8,7])
+// [1, 2, 4, 5, 6, 7, 8]
+var quickSort = function(myArray) {　　
+    // 当被分的数组只剩一个时，退出递归
+    if (myArray.length <= 1) {
+        return myArray;// 结束条件
+    }
+    var pivotIndex = Math.floor(myArray.length / 2);　　
+    var pivot = myArray.splice(pivotIndex, 1)[0]; // 基准值
+    var left = [];　　
+    var right = [];　　
+    // 小的放左边，大的放右边
+    for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i] < pivot) {　　
+            left.push(myArray[i]);　
+        } else {
+            right.push(myArray[i]);　
+        }　　
+    }　　
+    // 递归  把数组合并在一起
+    return quickSort(left).concat([pivot], quickSort(right));
+};
 
