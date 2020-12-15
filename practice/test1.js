@@ -56,6 +56,13 @@ function fb(n){
     return fb(n-1) + fb(n-2);
 }
 
+// 尾递归
+// ES6 中只要使用尾递归，就不会发生栈溢出（或者层层递归造成的超时），相对节省内存。
+function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+    if( n <= 1 ) {return ac2};
+    return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+  }
+
 // 动态规划法 1,1,2,3,5,8,13.....
 // 时间复杂度为O(n)
 var fib = function(n) {
