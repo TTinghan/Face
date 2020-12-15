@@ -115,6 +115,7 @@ function binarySearch(target, arr) {
     let start = 0;
     let end = arr.length -1;
     if(start > end) return -1;
+    let mid = Math.floor((start + end) / 2);
     while(start < end) {
         if(target === arr[mid]){
             return mid;
@@ -259,7 +260,7 @@ function itemTimes(s){
  * 然后使用 toString(16) 将其转换为十六进制字符串。
  */
  function randomHexColorCode(){
-     let num = Math.random() * 0xffffff | 0;// 生成6位随机数
+     let num = Math.random() * 0xffffff | 0; //生成一个随机的24位（6x4位）十六进制数。
      let str = num.toString(16);// 转16进制字符串
      let lastStr = str.length !== 6 ? (Math.random() * 0xf | 0).toString(16) + str : str
      return `#${lastStr}`;

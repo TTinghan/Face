@@ -114,3 +114,19 @@ function isPalindrome (s) {
     return s.toString() === s.toString().split('').reverse().join('');
 }
 
+// 将10 -> 9
+// 100 -> 99
+var monotoneIncreasingDigits = function(N) {
+    if (N < 10) return N
+    let NArr = N.toString().split('')
+    for (let i = NArr.length - 2; i > -1; i--) {
+      if (NArr[i] > NArr[i + 1]) {
+        NArr[i]--
+        for (let j = i + 1; j < NArr.length; j++) {
+          NArr[j] = 9
+        }
+      }
+    }
+    return Number(NArr.join(''))
+  };
+
