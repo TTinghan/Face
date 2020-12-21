@@ -24,6 +24,7 @@
     [react/redux/react-redux](https://juejin.cn/post/6844903624565325832)
 18. [面试之前过一遍！！基础的css/js问题](https://juejin.cn/post/6844903776512393224?utm_source=gold_browser_extension%3Futm_source%3Dgold_browser_extension)
 19. [尾递归，尾调用](https://zhuanlan.zhihu.com/p/130885188)
+20. [app开发-hybird](https://blog.csdn.net/zx48822821/article/details/79974552)
 
 #### 浏览器相关
 
@@ -38,13 +39,12 @@
 其中， HTTPS 是在 HTTP 的协议上加了一层加密协商，这层加密协商在提高安全性的同时带来了完全新增的  TLS RTT，这对延迟是必然的增加。HTTP/2 的链接复用虽然可以将多个资源放到一个链接里，实现多路复用，却仍有 TCP 层面的排头阻塞（Head-of-line blocking）问题。
 
 ```
-
 ### 为什么是三次握手，四次挥手？
 因为三次握手才能保证双方具有接收和发送的能力
 三次握手：
 才可以阻止历史重复连接的初始化（主要原因）才可以同步双方的初始序列号 才可以避免资源浪费
 
-四次挥手：
+四次挥手：四次挥手即终止TCP连接
 服务端通常需要等待完成数据的发送和处理，所以服务端的 ACK 和FIN 一般都会分开发送，从而比三次握手导致多了一次
 
 ### 链表和数组的区别：
@@ -80,6 +80,13 @@ check: setImmediate()的回调会在这个阶段执行。
 close callbacks: 例如socket.on('close', ...)这种close事件的回调。
 
 ```
+### hook解决了class的什么问题
+```
+1. 代码复用：组件之间复用状态逻辑提供了便利，Hook 使你在无需修改组件结构的情况下复用状态逻辑。
+2. 代码管理：解决复杂组件难以理解的问题，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据），而并非强制按照生命周期划分。
+3. 解决了class和this工作方式的学习成本问题，Hook无需学习复杂的函数式或响应式编程技术。
+```
+
 ### react-router原理
 ```
 当我们的路由发生变化时，Router中所监听的history函数将会触发，返回新的location对象，这时将会触发Router的setState，然后对应所有绑定Router的Route都将会重新渲染判断是否命中路由来进行重新渲染。

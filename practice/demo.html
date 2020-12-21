@@ -51,35 +51,132 @@
          </div>
   </body>  
   <script>
-    var checkValidString = function(s) {
-    let left = [];
-    let star = [];
-    for(let i = 0; i < s.length; i++){
-        switch(s[i]){
-            case '(':
-                left.push(s[i]);
-                break;
-            case '*':
-                star.push(s[i]);
-                break;
-            case ')':
-            if(left.length == 0){
-                if(star.length == 0) return false;
-                star.pop();
-            }else {
-                left.pop();
-            }
-            break;
-        }
-    }
-    if(left.length > star.length) return false;
-    while(left.length && star.length){
-        if(left.pop() > star.pop()){
-            return false;
-        }
-    }
-    return true;
+
+  function A() {
+    this.b = 3;
+}
+var b = 5;
+var c = new A();
+A.prototype = {
+    b: 7,
+    d: 2,
 };
+A();
+
+console.log(b);
+console.log(c.b);
+console.log(c.d); 
+
+// var compareVersion = function(version1, version2) {
+//     let arr1 = version1.toString().split('.');
+//     let arr2 = version2.toString().split('.');
+//     let len1 = arr1.length;
+//     let len2 = arr2.length;
+//     let len = len1 > len2 ? len1 : len2;
+//     for(let i = 0; i<len; i++) {
+//         for(let j = i; j< len; j++) {
+//             if((Number(arr1[i]) || 0) < (Number(arr2[j]) || 0)){
+//                 return -1;
+//             }else if((Number(arr1[i]) || 0) > (Number(arr2[j]) || 0)){
+//                 return 1;
+//             }else {
+//               break;
+//             }
+//         }
+//     }
+//     return 0;
+// };
+
+    // var fun1,fun2,fun3;
+    // console.log(fun1,fun2,fun3);// undefined, undefined, undefined
+    // var fun1 = 1;
+    // var fun2 = function(){
+    //     console.log(1);
+    // }
+    // var fun3 = function(){
+    //     console.log(2);
+    // }
+    // var fun1,fun2,fun3;
+    // console.log(fun1,fun2,fun3);// 1, func, func
+
+
+// console.log('script start')// 1 同步
+// async function async1() {
+//   await async2()
+//   console.log('async1 end')// 4 微任务
+// }
+// async function async2() {
+//   console.log('async2 end') // 2 同步
+// }
+// async1()
+// setTimeout(function() {
+//   console.log('setTimeout')// 8 宏任务
+// }, 0)
+// new Promise(resolve => {
+//   console.log('Promise');// 3 同步
+//   resolve()
+// })
+//   .then(function() {
+//     console.log('promise1'); // 6 微任务
+//   })
+//   .then(function() {
+//     console.log('promise2'); // 7 微任务
+//   })
+// console.log('script end'); // 4 同步
+
+
+// console.log(1);// 1 同步
+// setTimeout(()=>{
+//     console.log(2);// 4 宏任务（同步）
+//     Promise.resolve()
+//     .then(()=>{
+//         console.log(3); // 5 宏任务（微任务）
+//     })
+// }, 1000)
+// let p =  new Promise(resolve => {
+//     console.log(4); // 2 同步
+//   setTimeout(()=>{
+//     console.log(5);// 6 宏任务
+//     resolve();// 延迟了把p.then变成了宏任务
+//   }, 1000);
+// });
+// p.then((resolve)=>{
+//     console.log(6);// 7 
+// },(reject)=>{
+//     console.log(7); // 不会打印
+// });
+// console.log(8); // 3 同步
+
+//     var checkValidString = function(s) {
+//     let left = [];
+//     let star = [];
+//     for(let i = 0; i < s.length; i++){
+//         switch(s[i]){
+//             case '(':
+//                 left.push(s[i]);
+//                 break;
+//             case '*':
+//                 star.push(s[i]);
+//                 break;
+//             case ')':
+//             if(left.length == 0){
+//                 if(star.length == 0) return false;
+//                 star.pop();
+//             }else {
+//                 left.pop();
+//             }
+//             break;
+//         }
+//     }
+//     if(left.length > star.length) return false;
+//     while(left.length && star.length){
+//         if(left.pop() > star.pop()){
+//             return false;
+//         }
+//     }
+//     return true;
+// };
+
 // let promise = new Promise((resolve, reject)=>{
 //     reject(1);
 // })
@@ -94,15 +191,6 @@
 // }, (err)=>{
 //     console.log('err2-2', err)
 // })
-  // function rancolr() {
-  //     var r = parseInt(Math.random() * 256);
-  //     var g = parseInt(Math.random() * 256);
-  //     var b = parseInt(Math.random() * 256);
-  //     var rgb = "rgb(" + r + "," + g + "," + b + ")";
-  //     return rgb;
-  //  }
-  //  rancolr();
-
   //  setTimeout(() => {
   //     setTimeout(() => {
   //       console.log(1);
@@ -113,29 +201,29 @@
   //   console.log(2);
   // }, 100);
 
-    // 将hex表示方式转换为rgb表示方式(这里返回rgb数组组合)
-    function colorRgb(sColor){
-       var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-       var sColor = sColor.toLowerCase();// 小写
-       if(sColor && reg.test(sColor)){
-              //  统一为6位颜色值
-               if(sColor.length === 4){// 是3位
-                       var sColorNew = "#";
-                       for(var i=1; i<4; i+=1){
-                               sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));
-                       }
-                       sColor = sColorNew;
-               }
-               //处理六位的颜色值
-               var sColorChange = [];
-               for(var i=1; i<7; i+=2){ // 是6位
-                       sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
-               }
-               return sColorChange;
-       }else{
-               return sColor;
-       }
-    };
+// 将hex表示方式转换为rgb表示方式(这里返回rgb数组组合)
+// function colorRgb(sColor){
+//    var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+//    var sColor = sColor.toLowerCase();// 小写
+//    if(sColor && reg.test(sColor)){
+//           //  统一为6位颜色值
+//            if(sColor.length === 4){// 是3位
+//                    var sColorNew = "#";
+//                    for(var i=1; i<4; i+=1){
+//                            sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));
+//                    }
+//                    sColor = sColorNew;
+//            }
+//            //处理六位的颜色值
+//            var sColorChange = [];
+//            for(var i=1; i<7; i+=2){ // 是6位
+//                    sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
+//            }
+//            return sColorChange;
+//    }else{
+//            return sColor;
+//    }
+// };
 
     // 将rgb表示方式转换为hex表示方式
     // function colorHex(rgb){

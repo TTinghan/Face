@@ -130,3 +130,38 @@ var monotoneIncreasingDigits = function(N) {
     return Number(NArr.join(''))
   };
 
+  /**去重 字典最小
+   * bacbc->abc
+   * @param {*} s 
+   */
+  var removeDuplicateLetters = function(s) {
+    let stack = [], i = -1
+    while (++i < s.length) {
+        const n = s[i]
+        if (stack.includes(n) === false) {
+            let j = stack.length
+            while(j-- && stack[j] > n && s.includes(stack[j], i)) stack.pop()
+            stack.push(n)
+        }
+    }
+    return stack.join('')
+};
+
+// 第一是webpack优化，
+// 第二是常见的兼容问题处理，
+// 第三是短信安全优化这个需求我会让你讲清楚，
+// 第四是微信授权体系，其实背后是oauth认证体系，这个可以了解一下背景。
+// 第五是im这块，我觉得你得想清楚怎么讲。比如重试方案架构等等。
+var longestCommonPrefix = function(strs) {
+    if (strs === null || strs.length === 0) return "";
+    let prevs = strs[0]
+    for(let i = 1; i < strs.length; i++) {
+        let j = 0
+        for(; j < prevs.length && j < strs[i].length; j++) {
+            if(prevs.charAt(j) !== strs[i].charAt(j)) break
+        }
+        prevs = prevs.substring(0, j)
+        if(prevs === "") return ""
+    }
+    return prevs
+};

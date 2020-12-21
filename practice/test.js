@@ -3,7 +3,7 @@ Function.prototype.bind = function(asThis){
     if(asThis == null || typeof asThis === 'undefined'){
         asThis = window;
     }
-    let fn = this;
+    let fn = this;// 拿到Function实体
     return function(...args){
         return fn.apply(asThis, args)
     }
@@ -14,7 +14,7 @@ Function.prototype.call = function(asThis, ...args){
         asThis = window;
     }
     let fnSymbol = Symbol();
-    asThis[fnSymbol] = this;
+    asThis[fnSymbol] = this; // 拿到Function实体
     let fn = asThis[fnSymbol](...args);
     delete asThis[fnSymbol];
     return fn;
@@ -25,7 +25,7 @@ Function.prototype.apply = function(asThis, args){
         asThis = window;
     }
     let fnSymbol = Symbol();
-    asThis[fnSymbol] = this;
+    asThis[fnSymbol] = this; // 拿到Function实体
     let fn = asThis[fnSymbol](...args);
     delete asThis[fnSymbol];
     return fn;

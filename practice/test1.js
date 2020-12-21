@@ -46,8 +46,6 @@ function throttle(fn, wait) {
     }
 }
 
-
-
 // 斐波那契数列 f(n) = fb(n-1) + fb(n-2)  递归调用 时间复杂度为O(2^n)
 function fb(n){
     if(n == 1 || n == 2) {

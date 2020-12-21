@@ -17,6 +17,9 @@
 ①在当前的[微任务]没有执行完成时，是不会执行下一个[宏任务]的。
 ②也就是说new Promise在实例化的过程中所执行的代码都是同步进行的，而then中注册的回调才是异步执行的。
 在同步代码执行完成后才回去检查是否有异步任务完成，并执行对应的回调，而微任务又会在宏任务之前执行。
+①同步： 正常同步代码
+    new Promise()中的代码
+    await前面的代码(async)相当于new Promise
 ③宏任务：
     setTimeout
     setInterval
@@ -25,12 +28,14 @@
     I/O
     UI rendering (浏览器独有)
 ④微任务：
+    Promise.then catch finally， 
+    await后面的代码相当于Promise.then，
+    MutationObserver（仅浏览器）
     process.nextTick (Node独有)
-    Promise
     Object.observe
     MutationObserver
  （注：这里只针对浏览器和NodeJS）
-ps:事件轮询：https://shimo.im/docs/Bme7GuUc4tY7f8C1/read
+ps:事件轮询：https://zhuanlan.zhihu.com/p/55511602
 ### 8、深浅拷贝：
 #### js基本数据类型分为：
 基本类型按照只传递（Number、String、Boolean）+引用类型按照引用值传递（Object、Array）
