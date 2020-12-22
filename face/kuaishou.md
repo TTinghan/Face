@@ -83,11 +83,15 @@ function merge (arr1, arr2){
 
 ```
 7. 了解promise么？说下Promise.all与allSettled区别， Promise.all参数都可以是什么？
+
+```
 - promise.all: 此实例在 iterable 参数内所有的 promise 都“完成（resolved）”或参数中不包含 promise 时回调完成（resolve）,如果参数中  promise 有一个失败（rejected），此实例回调失败（reject），失败的原因是第一个失败 promise 的结果。
 - promise.allSettled： 该方法返回一个在所有给定的promise已被决议或被拒绝后决议的promise，并带有一个对象数组，每个对象表示对应的promise结果。如果我们请求多个接口需要统计错误的次数，就可以用到此方法.
 
+```
 8. 实现promise.all的pollify，上代码就完了。
 9. 你觉得让你印象最深刻的问题是什么？你是怎么解决的？
+
 
 ## 二面
 
