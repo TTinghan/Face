@@ -71,44 +71,38 @@ console.log(c.b);
 
 17. 手写代码实现输出一个tree型的obj:
 ```
- const array = [
-
+ const treeArr = [
     {"id":0,"name":"根节点"},
-
     {"id":1,"name":"第一级1","pid":0},
-
-    {"id":2,"name":"第一级1","pid":0},
-
-    {"id":3,"name":"第二级1","pid":2},
-
-    {"id":5,"name":"第三级1","pid":4},
-    {"id":6,"name":"第三级2","pid":3},
-
+    {"id":2,"name":"第一级2","pid":0},
+    {"id":3,"name":"第二级1","pid":1},
+    {"id":4,"name":"第三级1","pid":3},
+    {"id":5,"name":"第三级2","pid":3},
 ];
-
-要求输出形如树形结构的对象
-
-{
-
+// 要求输出形如树形结构的对象
+const treeObj = {
     id: 0,
-
-    name: ‘abc’,
-
+    name: '根节点',
     children: [{
-
-         id: 1
-
-    }, {
-
-             id: 2
-
-             children: [{
-
-                id: 3
-
-             }]
-
+        id: 1,
+        name: '第一级1',
+        children: [{
+          id: 3,
+          name: '第二级1',
+          children: [{
+            id: 4,
+            name: '第三级1',
+            children: [],
+          }, {
+            id: 5,
+            name: '第三级2',
+            children: [],
+          }]
         }]
-
+    }, {
+        id: 2,
+        name:'第一级2',
+        children: [],
+    }]
 }
 ```
