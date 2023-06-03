@@ -14,7 +14,6 @@ function buildTree(treeArr) {
   for(const node of treeArr) {
     const { id, pid } = node;
     const currentNode = idMap[id];
-    const parentNode = idMap[pid];
     // 如果是根节点
     if(pid === undefined || pid === null) { // ***
       treeObj.id = currentNode.id;
