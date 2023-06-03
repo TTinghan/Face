@@ -4,14 +4,14 @@ function buildTree(treeArr) {
   const idMap = {};
 // 将节点按照id存储到idMap中
   for(const node of treeArr) {
-    const { id, name, pid } = node;
+    const { id, name } = node;
     idMap[id] = {id, name, children: [] };
   }
   // console.log(idMap, 9090);
 
   // 构建树形结构
   for(const node of treeArr) {
-    const { id, name, pid } = node;
+    const { id, pid } = node;
     const currentNode = idMap[id];
     const parentNode = idMap[pid];
     if(parentNode) {
