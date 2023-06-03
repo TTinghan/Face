@@ -1,4 +1,5 @@
-// 树形对象转换算法
+// 在构建树的过程中，我们应该先找到根节点，然后递归地构建树的子节点
+/**树形对象转换算法*/
 function buildTree(treeArr) {
   const treeObj = {};
   const idMap = {};
@@ -14,12 +15,15 @@ function buildTree(treeArr) {
     const { id, pid } = node;
     const currentNode = idMap[id];
     const parentNode = idMap[pid];
-    if(parentNode) {
-      parentNode.children.push(currentNode);
-    } else {
+    // 如果是根节点
+    if(pid === undefined || pid === null) { // ***
       treeObj.id = currentNode.id;
       treeObj.name = currentNode.name;
-      treeObj.children = [currentNode]; // ??
+      treeObj.children = currentNode.children; // ***
+    } else {
+      // 如果不是根节点
+      const parentNode = idMap[pid]
+      parentNode.children.push(currentNode);
     }
   }
   console.log(JSON.stringify(treeObj), 9090);
