@@ -29,3 +29,15 @@ bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 
 let bound = addToThis.bind(obj, 10, 20);
 console.log(bound(30));  // 输出62
 ```
+
+# 5. vue的keep-alive组件使用方法和作用
+<keep-alive> 组件是一个用于缓存组件的特殊组件。它的作用是将动态组件进行缓存，以避免重复渲染和销毁。
+```
+<keep-alive>
+  <component :is="currentComponent"></component>
+</keep-alive>
+```
+1)缓存组件：当组件被切换时，<keep-alive> 组件会将之前渲染过的组件实例保存起来，而不是销毁它们。
+2)activated 和 deactivated 钩子：被 <keep-alive> 缓存的组件在切换时会触发 activated 和 deactivated 钩子函数，可以在这两个钩子中执行特定的操作，比如刷新数据、发送请求等。
+3)include 和 exclude 属性：<keep-alive> 组件提供了 include 和 exclude 属性，用于指定哪些组件需要被缓存或排除在缓存之外。
+4)max 属性：<keep-alive> 组件还提供了 max 属性，用于限制缓存的组件数量。当缓存的组件数量超过指定的最大值时，最早的组件实例将被销毁。
