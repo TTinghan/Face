@@ -80,3 +80,23 @@ var widthOfBinaryTree = function(root) {
     }
     return dp[goal][n];
 };
+
+// 数组创建链表的函数
+function LinkNode(val, next = null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+}
+function createLinkedList(arr) {
+    // 永远创建一个虚拟头节点 预先指针
+    let pre = new LinkNode(0);
+    // 指向当前节点的指针
+    let current = pre;
+
+    for(let val of arr) {
+        current.next = new LinkNode(val);
+        current = current.next;
+    }
+
+    // 永远返回结果链表的头节点
+    return pre.next;
+}
