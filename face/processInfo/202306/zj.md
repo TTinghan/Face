@@ -1,0 +1,39 @@
+zj
+
+# 性能优化都做了什么？都从哪些方面
+- 1.减少资源的⼤⼩：（Webpack Bundle Analyzer插件分析和可视化 webpack 打包产物体积）
+- - 收敛全局依赖
+- - 引入minify版本
+- - 缩减包体积，按需引入
+
+- 2.请求资源优化措施
+- - 缩短请求链路:将资源部署在CDN上,缓存资源 （service worker、storage、 html cache）
+
+- 3.将⼤的请求拆解为多⼩请求
+- - 第三⽅包（node_modules下的包）单独打包
+- - css代码从js⽂件中拆出成单独css⽂件
+- - 延迟加载: ⽤dynamic import: () => import('./lazy-module')
+
+- 4.优化【同步脚本】执⾏时间(火焰图)
+- - 通过⽕焰图，找到long task，然后找其中self time⻓的任务，逐项分析解决
+
+# 说一下什么是cdn？
+CDN（是Content Delivery Network的缩写）即“内容分发网络”，它是一种旨在通过将内容传输到离用户更近的服务器来加快互联网内容分发的一种系统。
+
+
+说一下flex布局
+
+vue和react的区别，哪个更推荐
+vue的响应式，vue3的响应式是用proxy实现的
+ Proxy用过么 用来做什么了？
+什么是进程什么是线程，二者什么关系
+问了 promise.all都是怎么实现的，为何可以单线程变成多线程？
+commonJs和EsCommon区别
+什么是宏任务，什么是微任务，谁先执行，EventLoop
+问什么叫做宏任务，微任务
+说一下Node的洋葱模型 
+npm依赖和pnpm依赖区别
+
+算法是大数相加 ‘12312312312’ + ‘23’
+实现一个compose中间件
+实现 一个发布订阅模式（什么是发布订阅）

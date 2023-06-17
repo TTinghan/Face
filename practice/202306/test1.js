@@ -41,3 +41,29 @@ function createLinkedList(arr) {
   }
   return pre.next;
 }
+
+// 将两个升序链表合并为一个新的 升序 链表并返回 (小-》大)
+var mergeTwoLists = function(list1, list2) {
+    let pre = new ListNode(0);
+    let current = pre;
+ 
+     while (list1 !== null && list2 !== null) {
+         if (list1.val < list2.val) {
+             current.next = list1;
+             list1 = list1.next;
+         } else {
+             current.next = list2;
+             list2 = list2.next;
+         }
+         current = current.next;
+     }
+ 
+     if (list1 !== null) {
+         current.next = list1;
+     } 
+     if (list2 !== null) {
+        current.next = list2;
+      }
+ 
+     return pre.next;
+ };
