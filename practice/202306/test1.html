@@ -1,4 +1,5 @@
-function ListNode(val, next) {
+<script>
+  function ListNode(val, next) {
   this.val = val === undefined ? 0 : val;
   this.next = next === undefined ? null : next;
 }
@@ -67,3 +68,36 @@ var mergeTwoLists = function(list1, list2) {
  
      return pre.next;
  };
+
+//  大数相加 ‘12312312312’ + ‘23’
+
+var maxNumAdd = function(str1, str2) {
+  if(!str1 && !str2) {
+    throw new Error('没传参数！');
+  }
+  let result = []; // 相加结果数组
+  let carry = 0; // 进位值
+  let l1 = str1.split('').reverse(); // 倒过来 从个位开始
+  let l2 = str2.split('').reverse(); // 倒过来 从个位开始
+  if(l1.length === 0) {
+    return Number(str2);
+  }
+  if (l2.length === 0) {
+    return Number(str1);
+  }
+  // 在最小数组前补0
+  while(l1.length < l2.length) {
+    l1.push('0');
+  }
+  while(l1.length > l2.length) {
+    l2.push('0');
+  }
+  for(let i = 0; i < l1.length; i++) {
+    let curNum = (Number(l1[i]) + Number(l2[i]) + carry) % 10;
+    carry = Math.floor((Number(l1[i]) + Number(l2[i]) + carry)/10);
+    result.unshift(curNum); // 不断向数组前面插入
+  }
+  return result.join('');
+}
+
+</script>
