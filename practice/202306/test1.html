@@ -93,8 +93,9 @@ var maxNumAdd = function(str1, str2) {
     l2.push('0');
   }
   for(let i = 0; i < l1.length; i++) {
-    let curNum = (Number(l1[i]) + Number(l2[i]) + carry) % 10;
-    carry = Math.floor((Number(l1[i]) + Number(l2[i]) + carry)/10);
+    let num = Number(l1[i]) + Number(l2[i]) + carry;
+    let curNum = num % 10;
+    carry = Math.floor(num / 10);
     result.unshift(curNum); // 不断向数组前面插入
   }
   return result.join('');
