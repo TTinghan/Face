@@ -101,3 +101,13 @@ function createLinkedList(arr) {
     // 永远返回结果链表的头节点
     return pre.next;
 }
+
+// 组合函数compose
+// 以flowRight为例子
+var flowRight = function(...fns) {
+    return function(initialValue) {
+        return fns.reverse().reduce((acc, fn) => {
+            return fn(acc); // 每个当前函数将累加器的结果作为参数
+        }, initialValue)
+    }
+}

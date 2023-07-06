@@ -124,7 +124,9 @@ setTimeout(function() {
     console.log('setTimeout'); // 宏任务
 }, 0);
 
-Promise.resolve().then(function() {
+new Promise((resolve, reject) => {
+    console.log(1111111); // 同步任务
+}).then(function() {
     console.log('promise1'); // 微任务
 }).then(function() {
     console.log('promise2'); // 微任务
@@ -140,6 +142,10 @@ console.log('script end'); // 同步任务
 //  setTimeout -> 异步的宏任务
 
 ```
+
+补充：
+当在 async 函数中使用 await 关键字时，它会暂停函数的执行，等待一个 Promise 对象的状态变为 resolved（已解决）后再继续执行后面的代码。这样可以避免使用回调函数或者 .then() 链式调用来处理异步操作的结果。
+当使用 async/await 时，await 后面的 Promise 对象会被注册为一个微任务，它会在当前宏任务执行完毕后立即执行，而不需要等待下一个宏任务。这使得 await 在事件循环中的行为类似于微任务。
 
 # Node 中的 Event loop
 
