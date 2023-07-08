@@ -45,7 +45,9 @@ eventHub.emit('currentEvent', '66666');
 eventHub.off('currentEvent', hander)
 
 
-// 二分查找 返回中位数
+// 二分查找 
+// nums = [-1,0,3,5,9,12], target = 9
+// 9 出现在 nums 中并且下标为 4
 var binarySearch = function(target, arr, start = 0, end = arr.length) {
   if (start > end) {
     return -1
@@ -58,6 +60,24 @@ var binarySearch = function(target, arr, start = 0, end = arr.length) {
   } else {
     return binarySearch(target, arr, mid + 1, end);
   }
+}
+
+// nums = [-1,0,3,5,9,12], target = 2
+// 2 不存在 nums 中因此返回 -1
+var binarySearch1 = function(target, arr) {
+  let start = 0;
+  let end = arr.length - 1;
+  while(start < end) {
+    let mid = Math.floor((start + end)/2);
+    if(target === arr[mid]) {
+      return mid;
+    } else if (target < arr[mid]) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+  if (start > end) return -1;
 }
 
 
