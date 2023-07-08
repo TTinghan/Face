@@ -1,5 +1,6 @@
 /**
  * 事件的发布-订阅模式
+ * 
  */
 class EventHub{
   constructor() {
@@ -31,4 +32,19 @@ class EventHub{
     if(index === -1 ) return;
     fnList.splice(index, 1);
   }
+}
+const eventHub = new EventHub();
+const hander = (data)=>{console.log(data)};
+// 订阅事件(监听)
+eventHub.on('currentEvent', hander); // '66666'
+// 在合适的地方触发事件(执行)
+// 通过on方法注册的handler函数就会被调用，且会接收到emit方法传递的数据
+eventHub.emit('currentEvent', '66666');
+// 如果你不再需要这个handler函数监听customEvent，你可以通过off方法移除它
+eventHub.off('currentEvent', hander)
+
+
+// 理解组合式函数compose，实现一个中间件
+var composeFn = function() {
+
 }
