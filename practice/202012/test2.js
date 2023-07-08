@@ -32,8 +32,8 @@ function curry(func) {
 // reduce() 可以作为一个高阶函数，用于函数的 compose组合。
 function flowRight (...fns) {
     return function (initValue) {
-        return fns.reverse().reduce(function (arr, itemFn) { // 对reduce不熟的去看一下
-            return itemFn(arr) // 每次都将参数放在每一个函数中执行一次
+        return fns.reverse().reduce(function (acc, itemFn) { // 对reduce不熟的去看一下
+            return itemFn(acc) // 每次都将参数放在每一个函数中执行一次
         }, initValue)
     }
 }
@@ -47,6 +47,7 @@ const composeFn = flowRight(toUpper, first, reverse);// 传入需要组合的fns
 composeFn(arr);// 执行这个composeFn
 
 /**手写 EventHub（发布-订阅）
+ * 应用于：JavaScript中的事件监听器
  * 核心思路是：
     使用一个对象作为缓存
     on 负责把方法发布到缓存的 EventName 对应的数组
@@ -54,18 +55,33 @@ composeFn(arr);// 执行这个composeFn
     off 找方法的索引，并删除
  */
 class EventHub {
-    cache = {}; // 作为缓存
-    on(eventName, fn) {
-      this.cache[eventName] = this.cache[eventName] || [];
-      this.cache[eventName].push(fn);
+    constructor() {
+        this.events = {}; // 作为缓存，存储所有的事件
     }
-    emit(eventName) {
-      this.cache[eventName].forEach((fn) => fn());
+    // 注册一个新的事件，并将处理事件的函数添加到事件处理函数数组中。
+    on(event, fn) {
+        // 如果不存在（该事件没有任何处理函数）这个事件，就创建一个空数组
+        // 如果存在（已经有函数订阅了该事件），就不需要处理，直接使用已经存在的数组
+        if(!this.events[event]) {
+            this.events[event] = [];
+        }
+        // 不论事件是否存在，都要把新的处理函数添加到数组末尾
+        // 便于当事件被触发的时候，所有订阅了该事件的函数都可以被调用
+        this.events[event].push(fn);
     }
-    off(eventName, fn) {
-      const index = indexOf(this.cache[eventName], fn); // 这里用 this.cache[eventName].indexOf(fn) 完全可以，封装成函数是为了向下兼容
+    // 触发指定的事件，并将数据传递给所有注册的处理函数
+    emit(event, data) {
+        let fnList = this.events[event];
+        if(fnList && fnList.length > 0) {
+            fnList.forEach(fn => fn(data));
+        }
+    }
+    // 删除指定事件的指定处理函数
+    off(event, fn) {
+      let fnList = this.events[event];
+      const index = fnList.indexOf(fn);
       if (index === -1) return;
-      this.cache[eventName].splice(index, 1);
+      this.cache[eventName].splice(index, 1); // 删除一位事件
     }
   }
 

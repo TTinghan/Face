@@ -19,8 +19,13 @@
 // 取余的操作是根据被除数的符号来决定余数的符号
 // 1e9+7
 
-// Array.from()
-// Array.fill(0)
+// Array.from() 
+// Array.from('foo')   -》["f", "o", "o"]
+// Array.from([1, 2, 3], x => x + x))   -》[2, 4, 6]
+
+// Array.fill(填充值，开始索引，结束索引) ，开始和结束是[)关系，且会改变原数组
+// Array.prototype.splice(开始，删除几个，替换) 且会改变原数组
+// Array.prototype.indexOf(查找对象，从第几个索引开始) 
 
 
 

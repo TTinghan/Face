@@ -35,3 +35,5 @@ console.log(curriedSum(1)(2)(3)); // 输出6
 console.log(curriedSum(1, 2, 3)); // 输出6
 console.log(curriedSum(1, 2)(3)); // 输出6
 console.log(curriedSum(1)(2, 3)); // 输出6
+
+// 函数式编程-》数学一样 会返回一个纯函数，值固定

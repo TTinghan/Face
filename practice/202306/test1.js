@@ -1,5 +1,4 @@
-<script>
-  function ListNode(val, next) {
+function ListNode(val, next) {
   this.val = val === undefined ? 0 : val;
   this.next = next === undefined ? null : next;
 }
@@ -101,4 +100,22 @@ var maxNumAdd = function(str1, str2) {
   return result.join('');
 }
 
-</script>
+// 无重复字符最长子串
+var lengthOfLongestSubstring = function(s) {
+  // 双指针
+  let start = 0; // 记录最大字符串开始位置的指针
+  let end = 0; // 记录最大字符串结束位置的指针
+  let maxLen = 0; // 最大长度
+  const chartSet = new Set(); // 缓存hash
+  while(start < s.length && end < s.length) {
+      if(!chartSet.has(s[end])) {
+          chartSet.add(s[end]);
+          end++;
+          maxLen = Math.max(maxLen, end - start);
+      } else {
+          chartSet.delete(s[start]);
+          start++;
+      }
+  }
+  return maxLen;
+};
