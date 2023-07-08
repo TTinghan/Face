@@ -55,9 +55,9 @@ function binarySearch(target, arr, start = 0, end = arr.length - 1) {
     var mid = Math.floor((start + end) / 2);// 向下取整 不进位
     if (target === arr[mid]) {
       return mid; // 查找成功，结束查找
-    } else if (target < arr[mid]) {
+    } else if (target < arr[mid]) { // 目标值在左半部分, 右指针左移缩小范围
       return binarySearch(target, arr, start, mid - 1)
-    } else {
+    } else { // 目标值在右半部分，左指针右移缩小范围
       return binarySearch(target, arr, mid + 1, end)
     }
 }

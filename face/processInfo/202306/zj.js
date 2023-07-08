@@ -45,6 +45,22 @@ eventHub.emit('currentEvent', '66666');
 eventHub.off('currentEvent', hander)
 
 
+// 二分查找 返回中位数
+var binarySearch = function(target, arr, start = 0, end = arr.length) {
+  if (start > end) {
+    return -1
+  }
+  let mid = Math.floor((start + end)/2);
+  if(target === arr[mid]) {
+    return mid;
+  } else if (target < arr[mid]) {
+    return binarySearch(target, arr, start, mid - 1 )
+  } else {
+    return binarySearch(target, arr, mid + 1, end);
+  }
+}
+
+
 // 理解组合式函数compose，实现一个中间件
 var composeFn = function() {
 
