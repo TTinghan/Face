@@ -78,11 +78,11 @@ class EventHub {
     }
     // 删除指定事件的指定处理函数
     off(event, fn) {
-      let fnList = this.events[event];
-      const index = fnList.indexOf(fn);
-      if (index === -1) return;
-      this.cache[eventName].splice(index, 1); // 删除一位事件
-    }
+        const fnList = this.events[event];
+        const index = fnList.indexOf(fn);
+        if (index === -1) return;
+        fnList.splice(index, 1);
+      }
   }
 
   // 手写await/async
