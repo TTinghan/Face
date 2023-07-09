@@ -119,3 +119,34 @@ var lengthOfLongestSubstring = function(s) {
   }
   return maxLen;
 };
+
+// 执行最后一次
+function debounce(func, wait) {
+  let timer;
+  return function() {
+    let context = this;
+    let args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(context, args);
+    }, wait);
+  }
+}
+
+// 执行第一次的
+function throttle(func, wait) {
+  let lock;
+  return function() {
+    let context = this;
+    let args = arguments;
+    if(!lock) {
+      func.apply(context, args);
+      lock = true; // 执行一次就锁住
+      // 过一会再打开
+      setTimeout(() => {
+        lock = false;
+      }, wait)
+    }
+  }
+}
+

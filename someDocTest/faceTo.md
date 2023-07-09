@@ -49,7 +49,7 @@ ps:事件轮询：https://zhuanlan.zhihu.com/p/55511602
 字节面试准备：
 手撕代码：①中文汉字字符串 转为数字--》五百三十万六千零三--》约束：输入金额在一亿以内。要求：做一定的容错处理
 
-###10.cookie的过程
+### 10.cookie的过程
 客户端发送请求到服务端，
 然后服务端返回的response headers中会有Set-Cookie这个字段，将信息写入 Cookie 中。
 然后在下一次客户端请求接口时，会在request headers里带上这个Cookie字段，
