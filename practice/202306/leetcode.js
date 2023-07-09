@@ -27,6 +27,8 @@
 // Array.prototype.splice(开始，删除几个，替换) 且会改变原数组
 // Array.prototype.indexOf(查找对象，从第几个索引开始) 
 
+// 位运算
+
 
 
 /**

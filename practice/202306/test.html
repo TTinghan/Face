@@ -1,3 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html.body {
+      background-color: #fff;
+      margin: 0;
+      height: 100vh;
+    }
+    .wrapper {
+      width: 200px;
+      height: 300px;
+      border: 1px solid #f40;
+      /* 方法一 */
+      /* position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto; */
+
+      /* 方法二 */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -100px;
+      margin-top: -150px;
+    }
+    .box {
+      height: 300px;
+      border: 1px solid #abcdef;
+      /* 未知宽或者高都可以用 */
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .flex-wrapper {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .border-box {
+      height: 300px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2>已知宽高：</h2>
+    我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好
+  </div>
+  <div class="box">
+    <h2>未知宽高：</h2>
+    我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好
+  </div>
+  <div class="flex-wrapper">
+    <div class="border-box">
+      <h2>未知宽高-flex：</h2>
+      我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好，我希望我可以越来越好
+    </div>
+  </div>
+</body>
+</html>
+
 <script>
   var binarySearch = function(target, arr, start = 0, end = arr.length) {
     if (start > end) {
