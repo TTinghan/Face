@@ -1,6 +1,6 @@
 - 全局引入依赖和_.set引入依赖是如何实现减少打包体积的，底层了解么？
 - dynamic import:() => import('./lazy-module') 是如何实现的？
-- 如果lazy-module里面有函数需要返回一个结果，这时exports是如何导出这个结果的？
+- 如果lazy-module里面有函数需要返回一个结果，这时export是如何导出这个结果的？
 - 如果你设计一个组件库，你考虑实现不同版本的引入，会让打包体积不同？
 - 如何实现的json-form组件，说一下实现细节？
 - vue中的watch 和 get 区别
@@ -14,3 +14,6 @@ JavaScript 的 forEach 方法不能被“中断”。forEach 函数会遍历整�
 - 浏览器的冒泡捕获说一下，有哪些事件不会冒泡捕获？
 - ts中的const和let
 - ts中的范型用过么？
+type prople <T> {
+  name:T
+}

@@ -3,7 +3,7 @@ zj
 # 性能优化都做了什么？都从哪些方面
 - 1.减少资源的⼤⼩：（Webpack Bundle Analyzer插件分析和可视化 webpack 打包产物体积）
 - - 收敛全局依赖
-- - 引入依赖包minify版本
+- - 引入依赖包minify版本(如terser、css-minimizer-webpack- plugin等)
 - - 缩减包体积，按需引入
 
 - 2.请求资源优化措施
@@ -153,12 +153,15 @@ console.log('script end'); // 同步任务
 - 语法上： 
 CommonJS 使用 require 来导入模块，使用 module.exports 或 exports 来导出模块。
 ES6 则使用 import 和 export 关键词来导入和导出模块
+
 - 加载方式上：
 CommonJS 是同步加载模块，模块文件都存储在本地磁盘，读取速度非常快；
 ES6 模块是异步加载的，模块文件可能需要从服务器获取，异步加载可以避免阻塞浏览器渲染。
+
 - 运行时和编译时加载：
 CommonJS 模块是运行时加载的，也就是说在运行代码时才确定模块的依赖关系和输入/输出的值。
 ES6 模块则是编译时加载，依赖关系和输入/输出的值在代码编译阶段就已经确定
+
 - 默认导出和命名导出：CommonJS 有一个module.exports可以用来导出模块的内容，而 ES6 允许模块有一个默认的导出（export default）和多个命名导出（export）。
 
 

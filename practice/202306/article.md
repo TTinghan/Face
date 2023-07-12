@@ -1,4 +1,7 @@
 [金三银四面试题总结](https://juejin.cn/post/7202639428132274234#heading-125)
+[js基础](www.javascript.info)
+[node相关](https://github.com/samerbuna/efficient-node)
+[Promise底层逻辑介绍](https://mattgreer.dev/articles/promises-in-wicked-detail/)
 
 # 1. px、em、rem区别和使用场景
 # 2. 什么是回流（重排）、重绘？区别？
