@@ -43,8 +43,6 @@ function cloneDeep(target) {
              } 
              return cloneTarget; 
     }
-    else {
-         return target;
-    } 
+    return target; 
 };
 
