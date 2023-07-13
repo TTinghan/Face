@@ -2,6 +2,7 @@
 [js基础](www.javascript.info)
 [node相关](https://github.com/samerbuna/efficient-node)
 [Promise底层逻辑介绍](https://mattgreer.dev/articles/promises-in-wicked-detail/)
+[vue系列](https://vue3js.cn/interview/vue/diff.html)
 
 # 1. px、em、rem区别和使用场景
 # 2. 什么是回流（重排）、重绘？区别？
@@ -56,3 +57,19 @@ CDN工作原理：
 2 CDN会选择最接近用户的服务器来提供服务。这个选择基于用户的地理位置、服务器的负载情况、网络条件等因素。
 3 所选的服务器会检查请求的内容是否在其本地缓存中。如果是，它就直接返回内容给用户。如果不是，它会从原始服务器或其他CDN服务器获取内容，然后返回给用户。
 
+# 7.Vue-Router
+实现的核心是更新视图而不重新请求页面
+
+- 模式：hash 模式和 history 模式
+1. hash 默认不会被包括在 HTTP 请求中，所以改变 hash 不会重新加载页面， # 后面的内容就是 hash。
+2. History 模式，利用了 HTML5 History Interface 中新增的 pushState()、replaceState() 方法来完成 URL 跳转而无需重新加载页面
+
+- 路由匹配渲染
+Vue-Router会监听 URL 的变化，解析 URL 为路由信息对象，找到对应的路由配置，并渲染对应的组件
+
+- 路由钩子
+beforeEach 钩子在路由改变之前被调用，你可以在这个钩子函数中进行登录验证、页面权限控制等操作
+
+- 组件
+<router-view> 组件是一个占位符，用于渲染匹配的组件。
+<router-link> 组件用于导航，在被点击时，会把目标路由的信息注册到 hash 或者 history 中

@@ -102,4 +102,21 @@
     }
     if (start > end) return -1;
   }
+
+  // 一行代码实现compose
+  const compose = (...fns) => fns.reduce((a,b) => (...args) => (a(b(...args))))
+  function sumStr(a,b) {
+    return a + b;
+  }
+  function strLen(str) {
+    return str.length;
+  }
+  function addPreFix(len) {
+    return `¥${len}`
+  }
+  const final = compose(addPreFix,strLen,sumStr);
+  const money = final('a', 'b');
+  console.log('money: ', money);
+
+  const compose1 = (...fns) => (fn.reduce((a,b) => (...agrs) => (a(b(...args)))))
 </script>
