@@ -1,4 +1,7 @@
-- 全局引入依赖和_.set引入依赖是如何实现减少打包体积的，底层了解么？
+# 全局引入依赖和_.set引入依赖是如何实现减少打包体积的，底层了解么？
+lodash：这个包是以CommonJS模块格式发布的。CommonJS模块不支持树摇优化（tree-shaking），这意味着即使你只需要使用一小部分的lodash功能，整个库仍然会被打包进你的bundle中。
+
+lodash-es：这个包是以ES模块格式发布的。ES模块支持树摇优化（tree-shaking），这就意味着如果你的打包工具（如webpack或rollup）配置正确，那么你的bundle中只会包含你实际使用到的lodash函数。
 # dynamic import: () => import('./lazy-module') 是如何实现的？
 动态导入（Dynamic Imports）是通过 import() 函数来实现的，这种方法允许你在运行时按需加载模块。动态导入可以帮助提高应用程序的加载速度，因为它允许我们只在需要时加载一部分代码
 

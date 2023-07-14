@@ -42,6 +42,16 @@ ps:事件轮询：https://zhuanlan.zhihu.com/p/55511602
 引用类型中涉及到深浅拷贝的问题:
 浅拷贝：引用赋值，浅拷贝的指向的是一个内存空间，修改任何一个值，都是修改同一个对象或数组
 深拷贝：会拷贝出来一个新的对象，新旧值一模一样
+
+typeof 1; // "number"
+typeof 'hello'; // "string"
+typeof undefined; // "undefined"
+typeof true; // "boolean"
+typeof Symbol('id'); // "symbol"
+typeof {}; // "object"
+typeof []; // "object"
+typeof null; // "object" -- 这是一个历史遗留问题
+typeof function() {}; // "function"
 ### 9、手写防抖&节流，二者有何区别：
 ①防抖是要最后一次的请求
 ②节流是要第一次的请求
