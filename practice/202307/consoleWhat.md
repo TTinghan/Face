@@ -76,7 +76,7 @@ function a(){
     return count + 10;
 }
 
-fcuntion b(){
+function b(){
     var count = 10;
     return a();
 }
