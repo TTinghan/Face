@@ -138,6 +138,7 @@ console.log(myObject.value);
 ```
 
 ```
+// 构造函数取值优先级： return对象 > 自带属性上的值 > 原型上的值
 function Foo(){
     this.a = 1;
     // 去掉return结果会是什么 =>1/7/8/9
