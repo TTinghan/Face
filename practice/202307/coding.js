@@ -122,3 +122,37 @@ function transform(treeObj) {
 
   return treeArr;
 }
+
+// 节点间最大差值
+// 深度优先 dfs
+const tree = {
+  value: 5,
+  left: {
+    value: 2,
+    left: { value: 6, left: null, right: null },
+    right: { value: 9, left: null, right: null }
+  },
+  right: {
+    value: 3,
+    left: { value: 1, left: null, right: null },
+    right: { value: 4, left: null, right: null }
+  }
+};
+function maxAncestorDiff(root) {
+  let maxDiff = 0;
+  function dfs(node, minValue, maxValue) {
+    if(node === null) {
+      return;
+    }
+    maxDiff = Math.max(Math.abs((node.value - minValue)), Math.abs((node.value - maxValue)));
+    minValue = Math.max(node.value, minValue);
+    minValue = Math.max(node.value, maxValue);
+    dfs(node.left, minValue, maxValue);
+    dfs(node.right, minValue, maxValue);
+  }
+  dfs(node, node.value, node.value);
+  return maxDiff;
+}
+
+// BFS queue队列 + shift
+
