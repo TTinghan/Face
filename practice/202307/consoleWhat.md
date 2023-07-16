@@ -221,6 +221,25 @@ var p = test.init();
 p();
 new p()
 ```
+```
+变形-》打印什么？为什么
+var a = 20;
+var test = {
+  a: 40,
+  init: function(){
+    console.log(this.a);
+    function go() {
+      console.log(this.a);
+    }
+    go.prototype.a = 50;
+    return go;
+  }
+};
+
+var p = test.init();
+p();
+new p()
+```
 
 ```
 打印什么？为什么？
