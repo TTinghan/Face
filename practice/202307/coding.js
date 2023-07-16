@@ -155,4 +155,26 @@ function maxAncestorDiff(root) {
 }
 
 // BFS queue队列 + shift
+function maxAncestorDiff(root) {
+  if (!root) {
+    return 0;
+  }
+  let maxDiff = 0;
+  let queue = [{node: root, max: root.value, min: root.value}]; // 保存节点和当前路径的最大和最小值
 
+  while (queue.length) {
+    let {node, max, min} = queue.shift();
+    maxDiff = Math.max(maxDiff, Math.abs(node.value - min), Math.abs(node.value - max));
+    max = Math.max(max, node.value);
+    min = Math.min(min, node.value);
+    if (node.left) {
+      queue.push({node: node.left, max, min});
+    }
+    
+    if (node.right) {
+      queue.push({node: node.right, max, min});
+    }
+  }
+
+  return maxDiff;
+}
