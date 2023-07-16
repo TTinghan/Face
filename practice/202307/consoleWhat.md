@@ -37,8 +37,9 @@ var Male = {
     console.log(this.nickname);
   }
 }
-var person = new (Person.bind(Male, 'XiaoHong'));
+var person = new Person.bind(Male, 'XiaoHong');
 person.sayHi();
+
 ```
 
 

@@ -30,11 +30,17 @@ bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 
 
 ```
 // 用法
+
 function addToThis(a, b) {
-  return this.x + this.y;
+  return this.x + this.y + a + b;
+}
+const obj = {
+  x: 10 * 2,
+  y: 10 + 2
 }
 let bound = addToThis.bind(obj, 10, 20);
 console.log(bound(30));  // 输出62
+
 ```
 
 # 5. vue的keep-alive组件使用方法和作用
