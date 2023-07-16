@@ -172,10 +172,28 @@ let promise = new Promise((resolve, reject)=>{
 promise.then((val)=>{
 console.log('then1-1', val)
 }, (err)=>{
-    console.log('err1-1', err);  // then1-1, 1
+    console.log('err1-1', err);
 })
 .then((val)=>{
-console.log('then2-2', val); // then2-2, undefined
+console.log('then2-2', val);
+}, (err)=>{
+    console.log('err2-2', err)
+})
+
+```
+```
+// 变形->都打印什么?
+let promise = new Promise.reject("Rejected!")
+
+promise.then((val)=>{
+console.log('then1-1', val);
+}, (err)=>{
+    console.log('err1-1', err);
+    // throw new Error(err);
+    return Promise.reject(err);
+})
+.then((val)=>{
+console.log('then2-2', val);
 }, (err)=>{
     console.log('err2-2', err)
 })
