@@ -51,3 +51,17 @@ function PromiseAllSettled(promises) {
     })
   })
 }
+// 链表反转
+function reverseList(head) {
+  let prev = null;
+  let current = head;
+  
+  while(current) {
+      let nextTemp = current.next;  // 存储下一个节点的引用
+      current.next = prev;  // 反转当前节点
+      prev = current;  // 更新prev指针为当前节点
+      current = nextTemp;  // 更新current为下一个节点
+  }
+
+  return prev;  // 在反转结束后，prev将指向新的头节点
+}
