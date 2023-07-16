@@ -183,7 +183,9 @@ console.log('then2-2', val);
 ```
 ```
 // 变形->都打印什么?
-let promise = new Promise.reject("Rejected!")
+let promise = new Promise((resolve, reject)=>{
+    reject(1);
+})
 
 promise.then((val)=>{
 console.log('then1-1', val);
