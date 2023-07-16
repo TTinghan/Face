@@ -1,6 +1,17 @@
 ### 1. new运算符的执行过程
-### 2. 手写promise.all，注意请求要第一个请求回来再请求下一个,了解promise么？说下Promise.all与allSettled区别， Promise.all参数都可以是什么？实现promise.all的pollify
+### 2. 手写promise.all，注意请求要第一个请求回来再请求下一个,了解promise么？说下Promise.all与allSettled区别， Promise.all参数都可以是什么？（实现promise.all的pollify）
 ### 3. 链表反转的实现
+function reverseList(head){
+  let prev = null;
+  let current = head;
+
+  while(current){
+    let nextTemp = current.next;
+    current.next = prev;
+    prev = nextTemp;
+  }
+  return prev;
+}
 ### 4. 手写代码实现输出一个tree型的obj
 手写代码实现输出一个tree型的obj:
 ```
