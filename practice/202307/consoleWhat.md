@@ -58,6 +58,18 @@ console.log(b);
 console.log(c.b);
 
 ```
+```
+变形-》打印什么？
+var a= function () {} 
+var c = new a();
+a.prototype.b = 9;
+var b = 7;
+a();
+
+console.log(b); 
+console.log(c.b);
+
+```
 
 ```
 打印什么文字颜色为什么？
@@ -77,7 +89,7 @@ function a(){
 }
 
 function b(){
-    var count = 10;
+    var count = 20;
     return a();
 }
 console.log(b()); 
