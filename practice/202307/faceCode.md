@@ -49,6 +49,8 @@ const treeObj = {
         children: [],
     }]
 }
+
+举一反三，如果展开的树再拍平呢？
 ```
 
 ### 5. 手写实现jsonp

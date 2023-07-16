@@ -25,7 +25,7 @@ function buildTree(treeArr) {
       parentNode.children.push(currentNode);
     }
   }
-  console.log(JSON.stringify(treeObj), 9090);
+  // console.log(JSON.stringify(treeObj), 9090);
   return treeObj;
 }
 const treeArr = [

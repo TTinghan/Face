@@ -65,3 +65,60 @@ function reverseList(head) {
 
   return prev;  // 在反转结束后，prev将指向新的头节点
 }
+
+function buildTree(treeArr) {
+  let treeObj = {};
+  let idMap = {};
+
+  for(let node of treeArr) {
+    let { id, name } = node;
+    idMap[id] = {id, name, children: []};
+  }
+  for(let node of treeArr) {
+    let { id, pid } = node;
+    let currentNode = idMap[id];
+    if(pid === undefined || pid === null) {
+      treeObj.id = currentNode.id;
+      treeObj.name = currentNode.name;
+      treeObj.children = currentNode.children;
+    } else {
+      let parentNode = idMap[pid];
+      parentNode.children.push(currentNode);
+    }
+  }
+  return treeObj;
+}
+
+// 反向拍平对象服务树
+// 递归
+function transform(treeObj) {
+  let treeArr = [];
+  function traverse(node, pid) {
+    const { id, name, children} = node;
+    treeArr.push(pid === undefined ? {id, name} : {id,name, pid})
+    for(let child of children) {
+      traverse(child, id);
+    }
+  }
+  traverse(treeObj);
+  return treeArr;
+}
+// 广度优先(BFS)
+function transform(treeObj) {
+  const treeArr = [];
+  const queue = [{...treeObj, pid: undefined}]; // 用一个队列开始遍历，根节点的父节点 id 为 undefined
+
+  while (queue.length > 0) {
+      // 取出队列的第一个元素
+      const node = queue.shift();
+      const {id, name, pid, children} = node;
+      // 在数组中添加当前节点，如果当前节点不是根节点，则添加父节点 id
+      treeArr.push(pid !== undefined ? {id, name, pid} : {id, name});
+      // 将当前节点的所有子节点添加到队列中，并设置它们的父节点 id 为当前节点的 id
+      for (let child of children) {
+          queue.push({...child, pid: id});
+      }
+  }
+
+  return treeArr;
+}
