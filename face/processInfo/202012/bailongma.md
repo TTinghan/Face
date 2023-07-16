@@ -9,11 +9,26 @@
     绑定this: 将这个对象作为构造函数的 this
     返回新对象(如果构造函数有自己 retrun 时，则返回该值)
 
-    function myNew(Con, ...args) {
-        let obj = Object.create(Con.prototype)
-        let result = Con.apply(obj, args)
-        return typeof obj === 'object' ? result : obj
+    function myNew(func, ...args) {
+        // 1. 创建一个新对象
+        const obj = {};
+        // 2. 设置该新对象的原型
+        obj.__proto__ = func.prototype;
+        // 3. 调用构造函数，用新对象作为上下文（this）
+        const result = func.apply(obj, args);
+        // 4. 如果构造函数返回了一个对象，就使用它，否则就用我们新创建的对象
+        return (typeof result === 'object' && result !== null) ? result : obj;
     }
+
+    // 应用
+    function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    }
+
+    let person = myNew(Person, "Alice", 25);
+    console.log(person.name); // "Alice"
+    console.log(person.age);  // 25
 
 ```
 2. let在全局声明之后，会不会出现在window对象上 --》考点：不会，因为不存在变量提升

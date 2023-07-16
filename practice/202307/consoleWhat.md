@@ -292,6 +292,22 @@ setTimeout(function() {
 ```
 
 ```
+// 变形
+function Car(name) {
+    var carName = name;
+    
+    this.getName = function() {
+        return carName;
+    }
+}
+
+let car1 = new Car('奔驰');
+let car2 = new Car('宝马');
+console.log(car1.getName(), car2.getName());
+
+```
+
+```
 打印什么？为什么？
 
 console.log('script start');
