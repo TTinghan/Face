@@ -138,7 +138,10 @@ console.log(myObject.value);
 ```
 
 ```
-// 构造函数取值优先级： return对象 > 自带属性上的值 > 原型上的值
+// 构造函数取值优先级： 
+// 有return:只看return对象 
+// 无return:自带属性上的值 > 原型上的值
+
 function Foo(){
     this.a = 1;
     // 去掉return结果会是什么 =>1/7/8/9
@@ -153,10 +156,10 @@ Foo.prototype.c = 8;
 Foo.prototype.d = 9;
 
 var o = new Foo();
-console.log(o.a); // => 4
-console.log(o.b);// => 5
-console.log(o.c);// => undefined
-console.log(o.d);// => undefined
+console.log(o.a);
+console.log(o.b);
+console.log(o.c);
+console.log(o.d);
 
 ```
 
