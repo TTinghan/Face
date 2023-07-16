@@ -26,3 +26,28 @@ function PromiseAll(promises){
     }
   })
 }
+
+// 全都会执行 不会中途reject出来
+function PromiseAllSettled(promises) {
+  return new Promise((resolve) => {
+    let settledLen = promises.length;
+    let settledResult = new Array(settledLen);
+    let settledCounter = 0;
+
+    promises.forEach((promise, index)=>{
+        Promise.resolve(promise).then(function(value){
+        settledResult[index] = { status: 'fulfilled', value: value };
+        settledCounter++;
+        if(settledCounter === settledLen) {
+          return resolve(settledResult);
+        }
+      }, function(reason){
+        settledResult[index] = { status: 'rejected', value: reason };
+        settledCounter++;
+        if(settledCounter === settledLen) {
+          return resolve(settledResult);
+        }
+      })
+    })
+  })
+}
