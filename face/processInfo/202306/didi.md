@@ -7,8 +7,6 @@
 # vue2和vue3的差别
 # vue的compotionApi了解么
 # 编码
-
-
 console.log('1'); // 同步
 
 setTimeout(function() {

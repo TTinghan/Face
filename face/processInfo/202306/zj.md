@@ -135,11 +135,10 @@ new Promise((resolve, reject) => {
 console.log('script end'); // 同步任务
 
 //  打印结果
-//  script start -> 同步任务
-//  script end -> 同步任务
-//  promise1 -> 异步的微任务
-//  promise2 -> 异步的微任务
-//  setTimeout -> 异步的宏任务
+script start
+1111111
+script end
+setTimeout
 
 ```
 
