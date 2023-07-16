@@ -97,6 +97,47 @@ console.log(b());
 ```
 
 ```
+// 一个构造函数返回的是一个对象（包括函数，数组等）
+// 这个返回值将会被用作新对象的值，这将覆盖原型上的值
+function MyConstructor() {
+  this.value = 'from instance';
+  return {
+    value: 'from return'
+  };
+}
+MyConstructor.prototype.value = 'from prototype';
+
+var myObject = new MyConstructor();
+console.log(myObject.value);
+
+```
+```
+// 一个构造函数返回的是一个非对象类型（比如，数值，字符串，布尔值，null，undefined等）
+// 这个返回值将会被忽略，新对象将从构造函数的prototype属性继承值
+function MyConstructor() {
+  this.value = 'from instance';
+  return 'from return';
+}
+MyConstructor.prototype.value = 'from prototype';
+
+var myObject = new MyConstructor();
+console.log(myObject.value);
+
+```
+
+```
+// 一个构造函数没有返回值，优先看函数有没有自带属性，有就读，没有就找原型
+function MyConstructor() {
+  this.value = 'from instance';
+}
+MyConstructor.prototype.value = 'from prototype';
+
+var myObject = new MyConstructor();
+console.log(myObject.value);
+
+```
+
+```
 function Foo(){
     this.a = 1;
     // 去掉return结果会是什么 =>1/7/8/9
