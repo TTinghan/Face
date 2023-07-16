@@ -14,7 +14,6 @@
         let result = Con.apply(obj, args)
         return typeof obj === 'object' ? result : obj
     }
-}
 
 ```
 2. let在全局声明之后，会不会出现在window对象上 --》考点：不会，因为不存在变量提升

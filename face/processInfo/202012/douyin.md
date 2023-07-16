@@ -27,11 +27,28 @@ a.prototype.b = 9;
 var b = 7;
 a();
 
-console.log(b); 
+console.log(b);
 console.log(c.b);
 
 ```
+
+```
+var a= function () {} 
+var c = new a();
+a.prototype.b = 9;
+var b = 7;
+a();
+
+console.log(b);  // 7
+console.log(c.b); // 9
+
+```
 7. 原型和原型链的关系是什么？
+prototype: 原型是JavaScript对象共享属性和方法的地方，
+__proto__: 而原型链是JavaScript查找对象属性和方法的路径。二者共同构成了JavaScript的继承机制。
+
+当你尝试访问一个对象的属性时，JavaScript会首先在该对象本身上查找这个属性，如果找不到，它会沿着该对象的原型链向上查找。
+
 8. 反问有什么想要了解的？
 
 

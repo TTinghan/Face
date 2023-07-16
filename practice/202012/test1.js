@@ -104,6 +104,23 @@ var say = sayHelloTo.bind(Foo); // Foo say hello to ABC
 say('ABC');
 
 
+function test(a, b){
+  console.log(a);
+  console.log(b);
+  var b = 234;
+  console.log(b);
+  a = 123;
+  console.log(a);
+  function a(){};
+  var a;
+  b = 234;
+  var b = function(){};
+  console.log(a);
+  console.log(b);
+}
+test(1);
+
+
 // 手写instanceOf 
 // object instanceof constructor 返回布尔值
 // instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。

@@ -189,10 +189,10 @@ setState之后，会把当前的component放到dirtyComponents = [], 在batchUpa
 
 ### new 一个实例化对象的过程，发生了什么
 ```
- new运算符的执行过程
-    新生成一个对象
-    链接到原型: obj.__proto__ = Con.prototype
-    绑定this: 将这个对象作为构造函数的 this
+ new运算符的执行过程 const obj = new Con()
+    新生成一个对象obj;
+    链接到原型: obj.__proto__ = Con.prototype;
+    绑定this: 将这个对象作为构造函数的 this;
     返回新对象(如果构造函数有自己 retrun 时，则返回该值)
 
     function myNew(Con, ...args) {
