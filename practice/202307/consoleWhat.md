@@ -85,7 +85,7 @@ console.log(c.b);
 // 打印什么？为什么，说下理由？
 var count = 10;
 function a(){
-    return count + 10;
+    return count + 10; // 在定义a的时候已经决定读取全局的count了,因为其内部没有
 }
 
 function b(){
