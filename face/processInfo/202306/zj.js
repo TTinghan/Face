@@ -82,6 +82,4 @@ var binarySearch1 = function(target, arr) {
 
 
 // 理解组合式函数compose，实现一个中间件
-var composeFn = function() {
-
-}
+var composeFn = (...fns) => fns.reduce((a,b) => (...args) => (a(b(...args))))

@@ -178,3 +178,47 @@ function maxAncestorDiff(root) {
 
   return maxDiff;
 }
+ //  二分查找
+function binarySearch(target, arr) {
+  let start = 0;
+  let end = arr.length - 1;
+  while(start < end) {
+    let mid = Math.floor((start + end) / 2);
+    if(arr[mid] === target) {
+      return mid;
+    }else if(target > arr[mid]) {
+      start = mid + 1;
+    } else {
+      end = mid - 1;
+    }
+  }
+  if(start > end) {
+    return -1
+  }
+}
+
+function binarySearch(target, arr, start = 0, end = arr.length -1) {
+  if(start > end) return -1;
+  let mid = Math.floor((start + end) / 2);
+  if(target === arr[mid]) {
+    return mid;
+  } else if(target > arr[mid]) {
+    return binarySearch(target, arr, mid + 1, end);
+  } else {
+    return binarySearch(target, arr, start, mid -1);
+  }
+}
+
+function CloneDeep(obj) {
+  if(obj === null) return null;
+  if(typeof obj !== 'object') return obj;
+  if(obj instanceof Date) return new Date();
+  if(obj instanceof RegExp) return new RegExp();
+
+  let newObj = Array.isArray(obj) ? [] : {};
+  for(let key in obj) {
+    if(obj.hasOwnProperty(key)) {
+      newObj[key] = CloneDeep(obj[key]);
+    }
+  }
+}

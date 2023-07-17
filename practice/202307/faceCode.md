@@ -101,3 +101,4 @@ function getValue() {}
 ### 18. 理解组合式函数compose，实现一个中间件
 ### 19. 实现 一个发布订阅模式（什么是发布订阅）
 ### 20. 手动实现一个Function.prototype.bind()
+### 21. 二分查找

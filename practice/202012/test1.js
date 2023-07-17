@@ -123,7 +123,7 @@ test(1);
 
 // 手写instanceOf 
 // object instanceof constructor 返回布尔值
-// instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
+// instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。会返回一个布尔值
 function myInstanceof(left, right) {
     if(left == null || typeof left !== 'object') {
         return false
