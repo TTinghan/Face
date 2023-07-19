@@ -10,6 +10,7 @@
 # 动态导入webpack是如何实现的，怎么去加载的？
 # 公司是这么规定平台指标的？
 服务可用时长占全年总时间的99.99%
+# 讲一下babel是怎么工作的？
 # 说一下异步的promise和async和await的关系？
 # async和await如何捕捉异常信息？
 # await后面有catch么？为什么？
