@@ -3,6 +3,7 @@
 [node相关](https://github.com/samerbuna/efficient-node)
 [Promise底层逻辑介绍](https://mattgreer.dev/articles/promises-in-wicked-detail/)
 [vue系列](https://vue3js.cn/interview/vue/diff.html)
+[vue基础](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/)
 
 # 1. px、em、rem区别和使用场景
 # 2. 什么是回流（重排）、重绘？区别？
