@@ -222,3 +222,44 @@ function CloneDeep(obj) {
     }
   }
 }
+
+// 两个数组合并
+function mergeArray(arr1, arr2) {
+  let arr = [];
+  while(arr1.length && arr2.length) {
+    if(arr1[0] > arr2[0]) {
+      arr.push(arr2.shift());
+    } else {
+      arr.push(arr1.shift());
+    }
+  }
+}
+
+// 发布订阅
+class EventHub{
+  constructor() {
+    this.events = {}; // 数据中心
+  }
+  on(event, fn){
+    if(!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(fn);
+  }
+
+  emit(event, data) {
+    let fnList = this.events[event];
+    if(fnList && fnList.length > 0) {
+      fnList.forEach((fn) => {
+        fn(data);
+      })
+    }
+  }
+
+  off(event, fn) {
+    let fnList = this.events[event];
+    let index = fnList.indexOf(fn);
+    if(index === -1) return;
+    fnList.splice(index, 1);
+  }
+}

@@ -1,20 +1,28 @@
 zj
 
 # 性能优化都做了什么？都从哪些方面
-- 1.减少资源的⼤⼩：（Webpack Bundle Analyzer插件分析和可视化 webpack 打包产物体积）
-- - 收敛全局依赖
-- - 引入依赖包minify版本(如terser、css-minimizer-webpack- plugin等)
-- - 缩减包体积，按需引入
+（Webpack Bundle Analyzer插件分析和可视化 webpack 打包产物体积）
 
-- 2.请求资源优化措施
+- 1.减少资源本身的⼤⼩：(加快资源请求速度)
+- - 打包时使⽤各种资源的Minify插件来减少体积（如terser、css-minimizer-webpack-plugin等插件）
+- - 使⽤合适的⽂件压缩（如图⽚在适合场景下使⽤webp。）
+- - 替换包 / 缩减包体积：(按需引入：echarts/elementUI 提供了一些按需引入设计) 按需引⼊包不仅减少⽹络加载时间，也能减少js执⾏时间.
+- - 不必要的包不要引⼊(webpack中有两项配置可以删除unused code，⼀是usedExports，⼆是sideEffects)
+- - 同包不同版本的重复依赖问题（使⽤npm管理包，则运⾏npm dedupe）
+
+- 2.优化请求资源路径
 - - 缩短请求链路:将资源部署在CDN上,缓存资源 （service worker、storage、 html cache）
 
-- 3.将⼤的请求拆解为多⼩请求
-- - 第三⽅包（node_modules下的包）单独打包
+- 3.将⼤的请求拆解为多⼩请求(对于请求的资源数量来讲，服务器已开启对http2的⽀持，其“多路复⽤”的特性致使，请求的⽂件数量多少不会对请求的总时间有较⼤影响, 但是可以缓存不必重复下载的资源)
+- - 第三⽅包（node_modules下的包）单独打包（便于浏览器缓存）
 - - css代码从js⽂件中拆出成单独css⽂件
-- - 延迟加载: ⽤dynamic import: () => import('./lazy-module')
+- - Url-loader等 limit可设置成false/0
 
-- 4.优化【同步脚本】执⾏时间(火焰图)
+- 4.延迟加载: （时间轴⽅向上，先请求必须代码，之后需要时再请求其他代码）
+- - ⽤动态导入：dynamic import: () => import('./lazy-module')；
+- - 结合webpack prefetch使⽤，来优化等待时间。
+
+- 5.优化【同步脚本】执⾏时间(火焰图)
 - - 通过⽕焰图，找到long task，然后找其中self time⻓的任务，逐项分析解决
 
 # 说一下什么是cdn？

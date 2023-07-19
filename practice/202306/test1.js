@@ -68,7 +68,7 @@ var mergeTwoLists = function(list1, list2) {
      return pre.next;
  };
 
-//  大数相加 ‘12312312312’ + ‘23’
+//  大数相加 ‘12312312312’ + ‘000000023’
 
 var maxNumAdd = function(str1, str2) {
   if(!str1 && !str2) {
