@@ -1,4 +1,5 @@
 [金三银四面试题总结](https://juejin.cn/post/7202639428132274234#heading-125)
+[面经](https://juejin.cn/post/6896810576778166280#heading-51)
 [js基础](www.javascript.info)
 [node相关](https://github.com/samerbuna/efficient-node)
 [Promise底层逻辑介绍](https://mattgreer.dev/articles/promises-in-wicked-detail/)

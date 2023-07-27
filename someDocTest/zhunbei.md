@@ -3,7 +3,12 @@ IOS交互兼容问题：
 1. sticky吸顶的问题 ->在写保险商城页面 本地和环境中吸顶效果不同 是因为我们的客户端老版本用的UIwebView 需要WKwebView才支持
 2. 滚动穿透问题-> 原因：移动端当有 fixed 遮罩背景和弹出层时，touchmove事件的默认行为未阻止，在屏幕上滑动能够滑动背景下面的内容
 解决：封装了高阶组件ScrollAllow
-   touchmove + preventDefault
+   弹窗全内容禁止掉touchmove的preventDefault()
+   ```
+   window.ontouchmove = function(e){
+    e.preventDefault();
+   }
+   ```
    接收props id
    禁止所有滚动 手动实现滚动--> 
    dom.scrollTop = (当前滚动的初始高度 - event.touches[0].clientY) + 滚动元素的初始高度
