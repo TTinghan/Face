@@ -22,8 +22,13 @@ preload/prefecth: 主线程可以在解析构建DOM的过程中找到它们时�
 # http缓存响应头
 # ssg
 # webpack打包流程，原理
+
 # webpack工作流程
-# babel原理
+# Babel的核心工作流程
+1. 语法解析阶段：babel会把源代码解析成一个抽象的语法解析树的数据结构，结构会保留源代码中所有的语法结构和信息，剔除掉无关的空格分号。
+2. 转换阶段：对语法解析树进行遍历。使用各种插件，babel可以在这个阶段添加、移除AST中的节点。比如识别出了ES6的语法转为ES5的语法
+3. 生成阶段：经过AST转换之后babel会把它转换为普通的代码字符串，相当于是源码解析的逆过程，babel将AST转为代码字符串并添加必要的空格和分号。
+
 # Flex: 1 代表什么意思
 # Object.prototype.toString.call()
 当我们使用 Object.prototype.toString.call(someObject) 时，我们实际上是在调用 Object.prototype.toString 函数，并将 this 值设置为 someObject。换句话说，我们是在询问：“如果我将 someObject 视为 Object 对象，并调用其 toString 方法，它会返回什么？”

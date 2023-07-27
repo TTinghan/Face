@@ -1,0 +1,18 @@
+聊项目
+介绍下性能优化都做了什么
+了解webpack的动态引入么 如何实现优化的
+说下json-form的实现
+
+dom的事件委托
+冒泡的事件委托
+冒泡和捕获的场景
+vue中冒泡和捕获的场景
+如何禁止冒泡
+css的display:none和visibly:hidden
+vue的v-if和v-show
+哪个会触发重排重绘
+js的EventLoop
+说下vue的响应式原理
+说下position所有的属性都是什么含义
+说下sticky布局有一个属性会阻止他吸附是哪个
+说下如何实现响应式布局
