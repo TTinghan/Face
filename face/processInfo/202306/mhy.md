@@ -8,8 +8,13 @@ dom的事件委托
 冒泡和捕获的场景
 vue中冒泡和捕获的场景
 vue的所有生命周期，每个周期都做了什么事
-如何禁止冒泡
-css的display:none和visibility:hidden
+# vue中如何禁止冒泡
+使用修饰符 .stop 来阻止事件冒泡
+```
+<button @click.stop="handleClick">点击按钮</button>
+
+```
+# css的display:none和visibility:hidden
 ```
 .parent {
   background-color: red;
