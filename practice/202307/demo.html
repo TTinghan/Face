@@ -1,0 +1,49 @@
+<script>
+  // 广度
+var levelOrder = function(root) {
+    if(!root) return [];
+    let res = [];
+    let queueArr = [root];
+    while(queueArr.length){
+        let nodeArr = [];
+        let len = queueArr.length;
+        for(let i = 0; i < len; i++){
+            const node = queueArr.shift();
+            nodeArr.push(node.val);
+            node.left && queueArr.push(node.left);
+            node.right && queueArr.push(node.right);
+        }
+        res.push(nodeArr);
+    }
+    return res;
+};
+
+var levelDFSOrder = function(root) {
+  if(!root) return [];
+  let res = [];
+  let level = 0;
+  const DFS = (node, level) => {
+    if (!node) return;
+    if(level >= res.length) res[level] = [];
+    let nextLevel = level + 1;
+    node.left && DFS(node.left, nextLevel);
+    node.right && DFS(node.right, nextLevel);
+  }
+  DFS(root, level);
+  return res;
+}
+
+ class Node {
+    constructor(val, left, right) {
+      this.val = (val===undefined ? 0 : val)
+      this.left = (left===undefined ? null : left)
+      this.right = (right===undefined ? null : right)
+    }
+ }
+
+ let root = [new Node(1, new Node(2), new Node(3, new Node(4), new Node(5)))];
+ console.log('root: ', root);
+//  let root = [3,9,20,null,null,15,7];
+
+ console.log(levelOrder(root));
+</script>

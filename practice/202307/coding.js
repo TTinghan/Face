@@ -104,23 +104,19 @@ function transform(treeObj) {
   return treeArr;
 }
 // 广度优先(BFS)
-function transform(treeObj) {
-  const treeArr = [];
-  const queue = [{...treeObj, pid: undefined}]; // 用一个队列开始遍历，根节点的父节点 id 为 undefined
-
+function flattenTree(tree) {
+  const result = [];
+  const queue = [tree];
   while (queue.length > 0) {
-      // 取出队列的第一个元素
-      const node = queue.shift();
-      const {id, name, pid, children} = node;
-      // 在数组中添加当前节点，如果当前节点不是根节点，则添加父节点 id
-      treeArr.push(pid !== undefined ? {id, name, pid} : {id, name});
-      // 将当前节点的所有子节点添加到队列中，并设置它们的父节点 id 为当前节点的 id
-      for (let child of children) {
-          queue.push({...child, pid: id});
+      const currentNode = queue.shift();
+      if (currentNode.path) {
+          result.push({ id: currentNode.node_id, name: currentNode.node_name, path: currentNode.path });
+      }
+      if (currentNode.children && currentNode.children.length > 0) {
+          queue.push(...currentNode.children);
       }
   }
-
-  return treeArr;
+  return result;
 }
 
 // 节点间最大差值
