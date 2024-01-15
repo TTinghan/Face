@@ -354,7 +354,7 @@ console.log(6); // 同步
 // 126435
 
 
-
+// 柯里化
 function Foo() {
     getName = function () {
         console.log(1);
