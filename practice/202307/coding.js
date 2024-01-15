@@ -260,4 +260,26 @@ class EventHub{
   }
 }
 
+/**
+ * ['111/222/', '111/333/', '111/444/'] -> 输出 { '111': [ '222', '333', '444' ] }
+ * ['459/460/', '459/460/461/', '459/474/'] ->  输出 { '459': [ '460', '460/461', '474' ] }
+ * @param array 
+ * @returns 
+ */
+function groupByStr(arr = []) {
+  const result = [];
+  const keyIndexMap = {};// {459: 0, 450: 1}
+
+  for (const item of arr) {
+      const [key, ...values] = item.split('/').filter(Boolean);
+      if (keyIndexMap[key] > -1) {
+          result[keyIndexMap[key]][key].push(values.join('/'));
+      } else {
+          result[result.length] = { [key]: [values.join('/')] };
+          keyIndexMap[key] = result.length - 1;
+      }
+  }
+  return result;
+}
+
 

@@ -64,7 +64,7 @@ obj={
     b: {
       c: '23232',
     }
-}
+  }
 }
 function getValue(target, str) {
   let newStr = str.replace('//g', ''); // 换掉[0]//  obj['a.0.b.c']
@@ -76,5 +76,40 @@ function getValue(target, str) {
       getValue(target[key], )
     }
   }
+}
+/**
+ * 根据path设置obj对象中的值
+ * setValueByPath(obj, 'a.b.c\\.d', '天天开心！')
+ * @param obj 
+ * let obj = {
+    "a": {
+        "b": {
+            "c.d": "old value"
+        }
+    },
+    "a.b.c.d": "newValue",
+    "d": "121212"
+};
+ */
+function setValueByPath(obj, path, value) {
+    const keys = path.split(/(?<!\\)\./).map(key => key.replace(/\\\./g, '.'));
+    let current = obj;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        if (!(key in current)) {
+            return; // 返回false表示路径不正确，无法设置值
+        }
+        current = current[key];
+    }
+
+    // 最后一个键是我们要设置的值的键
+    const lastKey = keys[keys.length - 1];
+    if (!(lastKey in current)) {
+        return; // 返回false表示路径不正确，无法设置值
+    }
+
+    // 设置值
+    current[lastKey] = value;
 }
   
