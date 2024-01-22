@@ -43,7 +43,7 @@ eventHub.on('currentEvent', hander); // '66666'
 eventHub.emit('currentEvent', '66666');
 // 如果你不再需要这个handler函数监听customEvent，你可以通过off方法移除它
 eventHub.off('currentEvent', hander)
-
+eventHub.emit('currentHub', '1111'); // 不会打印
 
 // 二分查找 
 // nums = [-1,0,3,5,9,12], target = 9
