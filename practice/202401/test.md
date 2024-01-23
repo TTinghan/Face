@@ -34,6 +34,8 @@ type ExampleReturnType = MyReturnType<typeof exampleFunction>;
 
 ```
 # 浏览器的性能优化
+# 课程表
+https://leetcode.cn/problems/course-schedule/description/
 
 # 手写一个发布订阅
 
