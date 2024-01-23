@@ -67,5 +67,42 @@ var longestCommonPrefix = function(strs) {
 
 // 示例
 const input = ["flower", "flow", "flight"];
-console.log(longestCommonPrefix(input)); // 输出: "fl"
+// console.log(longestCommonPrefix(input)); // 输出: "fl"
+
+// BFS 广度优先遍历
+var bfsTraversal = function(root) {
+  if(!root) {
+    return []
+  }
+  const result = [];
+  const queue = [root];
+  while(queue.length > 0) {
+    const node = queue.shift(); // 出队列一个
+    result.push(node.value);
+    if(node.left) {
+      queue.push(node.left);
+    }
+    if(node.right) {
+      queue.push(node.right);
+    }
+  }
+  return result;
+}
+
+class TreeNode {
+  constructor(val) {
+    this.value = val;
+    this.left = this.right = null;
+  }
+}
+
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(6);
+console.log(bfsTraversal(root));
+
+
 
