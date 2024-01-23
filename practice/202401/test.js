@@ -113,14 +113,21 @@ var dfsTraversal = function(root) {
     if(!node) {
       return [];
     }
-    result.push(node.value);
+    result.push(node.value); // 前序
     dfs(node.left);
     dfs(node.right);
+
+    // dfs(node.left);
+    // result.push(node.value); // 中序
+    // dfs(node.right);
+
+    // dfs(node.left);
+    // dfs(node.right);
+    // result.push(node.value); // 后序
   }
   dfs(root);
   return result;
 }
-
-console.log(dfsTraversal(root), 9090);
+console.log(dfsTraversal(root));
 
 
