@@ -36,12 +36,16 @@ parentElement.click();
 
 ```
 # vue的v-if和v-show哪个会触发重排重绘？
-- 都会引起重排和重绘
-v-if：这是一种条件渲染，它会根据表达式的真假来插入或移除元素，因此，v-if 会引起重排和重绘。
-v-show：不管条件表达式的真假，元素始终都会被渲染到 DOM，只是切换元素的 display CSS 属性从默认到none,当元素从 display: none 更改为其他值，它会被添加到布局中，需要重新计算元素的位置和尺寸，因此会触发重排。
+v-if：它涉及到 DOM 的添加和移除，它会根据表达式的真假来插入或移除元素，因此，v-if 会引起重排和重绘。
+v-show：不管条件表达式的真假，是通过 CSS 的 display 属性来控制元素的显示和隐藏。元素始终在 DOM 中存在，只是切换元素的 display CSS 属性从默认到none,当条件从 false 变为 true 时，不会触发重排，只是改变了 display 属性。但是，v-show 在条件从 true 变为 false 时，仍然会触发重排。
 
 # js的EventLoop
+
+
+宏任务（Macro Task）： 通常来自浏览器环境的任务，例如 setTimeout、setInterval、requestAnimationFrame、I/O 操作等。
+微任务（Micro Task）： 通常来自 JavaScript 引擎的任务，例如 Promise 的 then 方法、MutationObserver 等。
 # 说下vue的响应式原理
 # 说下position所有的属性都是什么含义
 # 说下sticky布局有一个属性会阻止他吸附是哪个
+父元素的 overflow 属性的值为 hidden、scroll、auto 或 overlay 时，可能会阻止 position: sticky;
 # 说下如何实现响应式布局

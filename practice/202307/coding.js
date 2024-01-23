@@ -103,7 +103,7 @@ function transform(treeObj) {
   traverse(treeObj);
   return treeArr;
 }
-// 广度优先(BFS)
+
 function flattenTree(tree) {
   const result = [];
   const queue = [tree];
@@ -150,7 +150,7 @@ function maxAncestorDiff(root) {
   return maxDiff;
 }
 
-// BFS queue队列 + shift
+// 广度优先 BFS queue队列 + shift
 function maxAncestorDiff(root) {
   if (!root) {
     return 0;
@@ -158,7 +158,7 @@ function maxAncestorDiff(root) {
   let maxDiff = 0;
   let queue = [{node: root, max: root.value, min: root.value}]; // 保存节点和当前路径的最大和最小值
 
-  while (queue.length) {
+  while (queue.length > 0) {
     let {node, max, min} = queue.shift();
     maxDiff = Math.max(maxDiff, Math.abs(node.value - min), Math.abs(node.value - max));
     max = Math.max(max, node.value);

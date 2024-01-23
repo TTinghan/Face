@@ -13,7 +13,9 @@
 # 讲一下babel是怎么工作的？
 # 说一下异步的promise和async和await的关系？
 # async和await如何捕捉异常信息？
+try...catch
 # await后面有catch么？为什么？
+await 后面通常不直接跟 catch，而是在包含 await 的 async 函数中使用 try...catch 来捕捉异常。这是因为 await 会暂停执行异步操作，而且它只能在 async 函数中使用。
 # 对node有研究么？
 # webpack是如何工作的？工作原理（工作机制）
 # 介绍一下你做的平台在公司中起到什么作用，为何重要？
