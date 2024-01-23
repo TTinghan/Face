@@ -102,7 +102,25 @@ root.right = new TreeNode(3);
 root.left.left = new TreeNode(4);
 root.left.right = new TreeNode(5);
 root.right.right = new TreeNode(6);
-console.log(bfsTraversal(root));
+// console.log(bfsTraversal(root));
 
+
+// DFS 广度优先遍历（递归-》前序/中序/后序）
+// 前序
+var dfsTraversal = function(root) {
+  const result = [];
+  const dfs = (node) => {
+    if(!node) {
+      return [];
+    }
+    result.push(node.value);
+    dfs(node.left);
+    dfs(node.right);
+  }
+  dfs(root);
+  return result;
+}
+
+console.log(dfsTraversal(root), 9090);
 
 
