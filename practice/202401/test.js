@@ -196,4 +196,44 @@ function convertListToSchema(list) {
   return res;
 }
 
+function revertList(head) {
+  let prev = null;
+  let current = head;
+  while(current) {
+    let nextTemp = current.next;
+    current.next = prev;
+    prev = current;
+    current = nextTemp;
+  }
+  return prev;
+}
+
+// 反转链表测试用例
+class ListNode {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+// 测试用例
+const node5 = new ListNode(5);
+const node4 = new ListNode(4, node5);
+const node3 = new ListNode(3, node4);
+const node2 = new ListNode(2, node3);
+const node1 = new ListNode(1, node2);
+console.log('原始链表:');
+let current = node1;
+while (current !== null) {
+  console.log(current.value);
+  current = current.next;
+}
+
+const reversedHead = revertList(node1);
+
+console.log('反转后的链表:');
+let reversedCurrent = reversedHead;
+while (reversedCurrent !== null) {
+  console.log(reversedCurrent.value);
+  reversedCurrent = reversedCurrent.next;
+}
 
