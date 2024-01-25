@@ -196,4 +196,28 @@ function convertListToSchema(list) {
   return res;
 }
 
+function listToSchema(list) {
+  const res = {
+    type: 'object',
+    properties: {}
+  }
+  list.forEach((item) => {
+    const parts = item.name.split('.');
+    let level = res.properties;
+    parts.forEach((part, index) => {
+      if(!level[part]) {
+        level[part] = {
+          type: 'object',
+          properties: {}
+        }
+      }
+      if(index === parts.length -1) {
+        level[part] = { type: item.type }
+      }
+      level = level[part].properties;
+    })
+  })
+  return res;
+}
+
 
