@@ -130,4 +130,70 @@ var dfsTraversal = function(root) {
 }
 console.log(dfsTraversal(root));
 
+// 输入list 输出res
+const list = [
+  {
+    name: 'name',
+    type: 'string',
+    require: true,
+  },
+  {
+    name: 'other.info',
+    type: 'string',
+    require: true,
+  },
+  {
+    name: 'other.addr',
+    type: 'string',
+    require: true,
+  }
+];
+
+const res = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+    },
+    other: {
+      type: 'object',
+      properties: {
+        info: {
+          type: 'string',
+        },
+        addr: {
+          type: 'string'
+        }
+      }
+    }
+  }
+}
+
+function convertListToSchema(list) {
+  const res = {
+    type: 'object',
+    properties: {},
+  };
+
+  list.forEach(item => {
+    const parts = item.name.split('.');
+    let currentLevel = res.properties;
+
+    parts.forEach((part, index) => {
+
+      if (!currentLevel[part]) {
+        currentLevel[part] = { type: 'object', properties: {} };
+      }
+
+      if (index === parts.length - 1) {
+        currentLevel[part] = { type: item.type };
+      }
+
+      currentLevel = currentLevel[part].properties;
+    });
+  });
+
+  return res;
+}
+
 
