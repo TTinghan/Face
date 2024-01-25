@@ -275,3 +275,4 @@ const newEvent = new EventBus();
 newEvent.on('currentBus', handers);
 newEvent.emit('currentBus', 888);
 newEvent.off('currentBus', handers);
+
