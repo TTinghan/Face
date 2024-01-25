@@ -237,3 +237,41 @@ while (reversedCurrent !== null) {
   reversedCurrent = reversedCurrent.next;
 }
 
+class EventBus {
+  constructor() {
+    this.events = {}
+  }
+
+  on(event, fn) {
+    if(!this.events[event]) {
+      this.events[event] = []
+    }
+    this.events[event].push(fn);
+  }
+
+  emit(event, data) {
+    const fnList = this.events[event];
+    if(fnList.length > 0) {
+      fnList.forEach((fn) => {
+        fn(data);
+      })
+    }
+  }
+
+  off(event, fn) {
+    const fnList = this.events[event];
+    const index = fnList.indexOf(fn);
+    if(index === -1) {
+      return;
+    }
+    fnList.splice(index, 1);
+  }
+}
+
+const handers = (data) => {
+  console.log(data);
+}
+const newEvent = new EventBus();
+newEvent.on('currentBus', handers);
+newEvent.emit('currentBus', 888);
+newEvent.off('currentBus', handers);
