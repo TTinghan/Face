@@ -9,7 +9,6 @@ const obj: D = {
     a: '',
     b: '',
 };
-
 function a() {
     return 1;
 }

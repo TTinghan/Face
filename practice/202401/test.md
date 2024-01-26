@@ -80,8 +80,8 @@ eventBus.emit('currentBus', 777);
 eventBus.off('currentBus', hander);
 
 # 最长公共前缀
-function longCommonPre() {
-  
+function longCommonPre(strs) {
+  if(strs.length < 0)  
 }
 
 # 二叉树深度优先遍历、广度优先
