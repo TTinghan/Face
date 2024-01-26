@@ -41,7 +41,107 @@ type ExampleReturnType = MyReturnType<typeof exampleFunction>;
 https://leetcode.cn/problems/course-schedule/description/
 
 # 手写一个发布订阅
+class EventHub{
+  constructor() {
+    this.events = {}
+  }
+
+  on(event, fn) {
+    if(!this.events[event]) {
+      this.events[event] = []
+    }
+    this.events[event].push(fn)
+  }
+
+  emit(event, data) {
+    const fnList = this.events[event];
+    if(fnList.length > 0) {
+      fnList.forEach((fn) => {
+        fn(data);
+      })
+    }
+  }
+
+  off(event, fn) {
+    const fnList = this.events[event];
+    const index = fnList.indexOf(fn);
+    if(index === -1) {
+      return;
+    }
+    fnList.splice(index, 1);
+  }
+}
+const hander = (data) => {
+  console.log(data);
+}
+const eventBus = new EventHub();
+eventBus.on('currentBus', hander);
+eventBus.emit('currentBus', 777);
+eventBus.off('currentBus', hander);
 
 # 最长公共前缀
+function longCommonPre() {
+  
+}
+
 # 二叉树深度优先遍历、广度优先
+class TreeNode {
+  constructor(val) {
+    this.value = val;
+    this.left = this.right = null;
+  }
+}
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(6);
+
+function dfsTraversal(root) {
+  if(!root) {
+    return []
+  }
+  const result = [];
+  const dfs = (node) => {
+    if(!node) {
+      return []
+    }
+    result.push(node.value);
+    dfs(node.left);
+    dfs(node.right);
+  }
+  dfs(root);
+  return result;
+}
+
+function bfsTraversal(root) {
+  if(!root) {
+    return [];
+  }
+  const result = [];
+  const queue = [root];
+  while(queue.length > 0) {
+    const node = queue.shift();
+    result.push(node.value);
+    if(node.left) {
+      queue.push(node.left);
+    }
+    if(node.right) {
+      queue.push(node.right);
+    }
+  }
+  return result;
+}
 # 反转链表
+function reverseList(head) {
+  const prev = null;
+  const current = head;
+  while(current !== null) {
+    const nextTemp = current.next;
+    current.next = prev;
+    prev = current;
+    current = nextTemp;
+  }
+  return pre;
+}
