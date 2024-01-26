@@ -1,5 +1,8 @@
 # css文件的下载会阻塞渲染，但是不会阻塞js的执行
 # 双向数据绑定
+
+# 说一下ts的范型
+泛型是 TypeScript 中强大且灵活的特性，它允许你编写可重用的代码，同时保留类型信息
 # TS的Record类型是怎么实现的？
 ```
 type MyRecord<K extends keyof any, T> = {
