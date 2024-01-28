@@ -18,10 +18,10 @@ function PromiseAll(promises){
         resolvedCounter++;
         resolvedValue[i] = value;
         if(resolvedCounter === promisesLen) {
-          return resolve(resolvedValue);
+          resolve(resolvedValue);
         }
       }, function(reason){
-        return reject(reason);
+        reject(reason);
       })
     }
   })
