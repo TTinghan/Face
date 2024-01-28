@@ -8,7 +8,7 @@ function myNew(func, ...args){
 function PromiseAll(promises){
   return new Promise((resolve, reject)=>{
     if (!Array.isArray(promises)){
-      return reject(new TypeError('arguements is must be array!'))
+      reject(new TypeError('arguements is must be array!'))
     }
     let promisesLen = promises.length;
     let resolvedValue = new Array(promisesLen);
