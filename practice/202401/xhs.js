@@ -22,7 +22,6 @@ function myPromiseAll(promises){
 }
 // 实例
 myPromiseAll([
-  // console.log(111),
   Promise.resolve('2222'),
   // Promise.reject('333'),
   Promise.resolve('4444'),
@@ -65,3 +64,67 @@ myEventBus.on('currentBus', hander);
 myEventBus.emit('currentBus', 1212);
 myEventBus.off('currentBus', hander);
 // 最长公共前缀
+
+// dfs
+function dfsTraversal(root) {
+  const result = [];
+  const dfs = (node) => {
+    if(!node) {
+      return []
+    }
+    result.push(node.value);
+    dfs(node.left);
+    dfs(node.right);
+  }
+  dfs(root);
+  return result;
+}
+
+// dfs变形树的数据结构
+const rootData = {
+  name: 'A',
+  children: [{
+    name: 'B',
+    children: [{
+      name: 'C',
+      children: [] // 可以添加更多子节点
+    }]
+  }]
+};
+// STEP1: 实现上述树状结构的渲染,类似
+`<div>
+<div>A</div>
+<div class="children">
+  <div>B</div>
+  <div class="children">
+    <div>C</div>
+  </div>
+</div>
+</div>`
+// 渲染树的函数
+function renderTree(node, parentElement, path = []) {
+  const element = document.createElement('div');
+  element.textContent = node.name;
+  // 添加点击事件监听器
+  element.addEventListener('click', () => {
+    const nodePath = path.concat(node.name).join('/');
+    console.log(nodePath);
+  });
+
+  if (node.children && node.children.length > 0) {
+    const childrenContainer = document.createElement('div');
+    childrenContainer.classList.add('children');
+    
+    node.children.forEach(child => {
+      renderTree(child, childrenContainer, path.concat(node.name));
+    });
+
+    element.appendChild(childrenContainer);
+  }
+
+  parentElement.appendChild(element);
+}
+
+// 在页面上渲染树
+const rootElement = document.getElementById('root');
+renderTree(rootData, rootElement);
