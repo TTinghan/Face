@@ -13,3 +13,13 @@ vue3相对于vue2都做了哪些优化
 实现一个stack([1,2,3,4])
 返回数组中每个元素到当前元素位置的累积
 预期输出[1,3,6,10]
+
+function stack(list) {
+    let result = [];
+    let l = [];
+    for(let i = 0; i < list.length; i ++) {
+        l.push(list[i]);
+        result.push(l.reduce((a, b) => a + b))
+    }
+    return result;
+}
