@@ -276,3 +276,34 @@ newEvent.on('currentBus', handers);
 newEvent.emit('currentBus', 888);
 newEvent.off('currentBus', handers);
 
+// 手写instanceof
+function myInstanceOf(obj, constructor) {
+  // 检查 obj 是否为对象
+  if (obj === null || typeof obj !== 'object') {
+    return false;
+  }
+
+  // 获取 constructor 的原型
+  let prototype = constructor.prototype;
+
+  // 循环查找 obj 的原型链
+  while (obj !== null) {
+    // 如果找到匹配的原型，返回 true
+    if (obj.__proto__ === prototype) {
+      return true;
+    }
+    // 否则，继续沿原型链向上查找
+    obj = obj.__proto__;
+  }
+  // 如果遍历完仍未找到匹配的原型，返回 false
+  return false;
+}
+// 测试
+function CustomObject() {}
+const customObj = new CustomObject();
+
+console.log(myInstanceOf(customObj, CustomObject)); // true
+console.log(myInstanceOf(customObj, Object));        // true
+console.log(myInstanceOf(customObj, Array));         // false
+
+
