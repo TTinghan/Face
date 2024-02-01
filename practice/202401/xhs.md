@@ -6,7 +6,7 @@ vue3:
 - 采用了静态提升（Static Hoisting）和模块化标记（Module Targeting）等技术
 - 使用了 Proxy 对象代替 Object.defineProperty，提高响应式系统的性能，减少getter和setter的开销
 - 支持更好的 Tree-shaking，通过 ES Module 的静态分析，可以更好地消除无用的代码，减小应用的体积
-- 
+-  Vue 3 对生命周期钩子进行了合并
 
 3. Proxy相对比Object.definePropety好在哪？
 Proxy 提供了一个强大的拦截器机制，可以拦截几乎所有对象操作，包括读取、写入、删除属性等。而 Object.defineProperty 只能拦截属性的读取和写入操作，无法直接拦截删除等其他操作。
