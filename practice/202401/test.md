@@ -84,7 +84,7 @@ function longCommonPre(strs) {
   if(strs.length < 0)  
 }
 
-# 二叉树深度优先遍历、广度优先
+# 二叉树深度优先遍历DFS、广度优先BFS
 class TreeNode {
   constructor(val) {
     this.value = val;
