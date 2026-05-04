@@ -23,7 +23,21 @@
 “React渲染流程包括：组件挂载、状态更新、props更新、组件重新渲染、DOM更新等。浏览器会根据组件的渲染结果，更新页面的DOM树，实现页面的动态交互。”
 
 - 如果一个用户点击页面，没有反应，那么如何排查问题？说一下思路
-“我会先用Chrome Performance录制操作，看是渲染时间长还是JS执行慢。如果是渲染问题，考虑使用虚拟列表（如react-window）只渲染可视区域；如果是JS问题，用React.memo和useMemo减少不必要的重渲染，并检查是否有批量更新（如React 18的自动批处理）。”
+`
+用户点击
+→ 浏览器事件系统
+→ JS 执行（事件回调）
+→ React 更新（状态/调度）
+→ 渲染（Re-render / Diff）
+→ 浏览器绘制（Layout / Paint）`
+1. 事件层有没有触发？Chrome DevTools → Event Listeners 查看是否有点击事件触发。
+2. JS 执行是否存在阻塞？Chrome DevTools → Performance 查看是否有JS执行记录。-》解决：Web Worker，useMemo / 分片计算，requestIdleCallback
+3. React 层渲染调度问题：Chrome DevTools → React DevTools查看是否有组件更新。
+4. 渲染层浏览器有没有卡住？Chrome DevTools → Performance 查看是否有渲染记录。解决：Chrome Performance 面板，FPS / Rendering
+5. 浏览器绘制有没有触发？Chrome DevTools → Performance 查看是否有绘制记录。
+
+“用户点击无响应的问题可以从事件、JavaScript执行、React渲染和浏览器渲染四个层面排查：
+首先确认事件是否正确触发，其次检查是否存在主线程阻塞导致事件无法及时响应；然后从 React 层分析是否存在 state 未更新、闭包问题或组件未重新渲染；最后检查浏览器渲染阶段是否存在重排或大量 DOM 操作导致卡顿。同时如果涉及接口请求，还需要考虑网络延迟问题。实际排查中我会结合 Chrome Performance 和 React DevTools，定位是 JS 阻塞还是渲染问题”
 
 - 说一下useState和useLayoutEffect的区别？
 useEffect 在浏览器绘制后异步执行；useLayoutEffect 在浏览器绘制前同步执行；
