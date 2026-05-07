@@ -90,7 +90,7 @@ const throttleSearch = throttle(scroll, 500);
 不会中断，一定等所有promise结束，返回每个promise的状态（全都要结果）
 // Promise.race：第一个完成（不论resolve还是reject）就结束，适合超时控制场景。
 // Promise.any：第一个成功就resolve，全部失败才reject。
-# Typescript
+# TypeScript
 1. 【interface】:可以被extends继承，也可以被implements实现,支持声明合并（同名interface自动merge）,定义对象结构时优先用。
 2. 【type】:支持联合类型A|B、交叉类型A&B。
 any:任意类型，可以赋值给任何类型，也可以从任何类型赋值。关闭类型检查，逃逸仓，尽量避免使用。
